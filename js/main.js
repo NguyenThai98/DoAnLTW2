@@ -1,45 +1,45 @@
 const responsive = {
-    0:{
-        items:1,
-         
+    0: {
+        items: 1,
+
     },
-    320:{
-        items:2,
-         
+    320: {
+        items: 2,
+
     },
-    600:{
-        items:3,
-         
+    600: {
+        items: 3,
+
     },
-    1000:{
-        items:4,
+    1000: {
+        items: 4,
     }
 }
-$(document).ready(function(){
+$(document).ready(function () {
     $nav = $('.nav');
     $toggleCollapse = $('.toggle-collapse');
 
     // click event toggle menu
-    $toggleCollapse.click(function(){
+    $toggleCollapse.click(function () {
         $nav.toggleClass('collapse');
     })
     // owl-carousel blog
     $(".owl-carousel").owlCarousel({
         loop: true,
-        autoplay:false,
-        autoplayTimeout:3000,
-        dots:false,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        dots: false,
         nav: true,
-        navText: [$('.owl-navigation .owl-nav-prev'),$('.owl-navigation .owl-nav-next')],
+        navText: [$('.owl-navigation .owl-nav-prev'), $('.owl-navigation .owl-nav-next')],
         responsive: responsive
 
     });
 
     //click to scroll top 
-    $('.move-up span').click(function() {
+    $('.move-up span').click(function () {
         $("html, body").animate({
             scrollTop: 0
-        },1000)
+        }, 1000)
     })
     //AOS Init
     AOS.init();
