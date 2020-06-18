@@ -24,17 +24,72 @@ $(document).ready(function () {
         $nav.toggleClass('collapse');
     })
     // owl-carousel blog
-    $(".owl-carousel").owlCarousel({
-        loop: true,
+    $('.slick-multiline-top-view').slick({
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 3,
         autoplay: true,
-        autoplayTimeout: 3000,
-        dots: false,
-        nav: true,
-        navText: [$('.owl-navigation .owl-nav-prev'), $('.owl-navigation .owl-nav-next')],
-        responsive: responsive
-
+        autoplaySpeed: 2000,
+        responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
     });
-
+    $('.slick-multiline-top-new').slick({
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 2,
+        responsive: [{
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+            // You can unslick at a given breakpoint now by adding:
+            // settings: "unslick"
+            // instead of a settings object
+        ]
+    });
     //click to scroll top 
     $('.move-up span').click(function () {
         $("html, body").animate({
@@ -42,5 +97,4 @@ $(document).ready(function () {
         }, 1000)
     })
     //AOS Init
-    AOS.init();
 })
