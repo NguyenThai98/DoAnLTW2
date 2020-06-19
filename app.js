@@ -1,0 +1,27 @@
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+require('./middlewares/view.mdw')(app);
+
+app.use(express.urlencoded({
+    extended: true
+}));
+
+app.use('/users', require('./routers/users.router'));
+
+app.use('/public', express.static('public'));
+
+app.get('/', function (req, res) {
+    res.render('home');
+})
+
+app.use(function (err, req, res, next) {
+    console.error(err.stack);
+    res.status(500).render('500', {
+        layout: false
+    });
+})
+app.listen(PORT, () => {
+    console.log(`start sever at port http://localhost:${PORT}`);
+})
