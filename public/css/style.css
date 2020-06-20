@@ -50,13 +50,13 @@ ul {
 }
 
 .tw-date {
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   font-weight: 600;
 }
 
 .tw-title {
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .content-item-top-view {
@@ -64,7 +64,7 @@ ul {
 }
 
 .img-top-view {
-  padding-bottom: 30px;
+  padding-bottom: 5px;
 }
 
 .post-item .item-img a>img {
@@ -501,4 +501,82 @@ footer.footer {
   .footer .rights {
     text-align: center;
   }
+}
+
+/* muc lien quan */
+.muclienquan>.item {
+  width: 30%;
+  margin-left: 20px;
+  margin-bottom: 50px;
+}
+
+.row.muclienquan {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.details-categories {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.details-content>* {
+  text-align: center;
+}
+
+.details-img a>img {
+  width: 100%;
+  object-fit: cover;
+}
+
+/* muc lien quan xxx*/
+
+/* ctiet-danhgia */
+.ctiet-danhgia {
+  background-color: #eff1f3;
+  border-radius: 25px;
+  padding: 10px;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+/* ctiet-danhgia xxx*/
+
+/* list category */
+
+.list-ct {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.list-ct>.item {
+  width: 20%;
+  margin-right: 20px;
+  margin-bottom: 25px;
+}
+
+/* list category xxx*/
+
+.panigation {
+  display: flex;
+  justify-content: center;
+  color: var(--text-gray);
+  margin-bottom: 20px;
+}
+
+.panigation a {
+  padding: 0.2rem 0.6rem;
+  border-radius: 50%;
+  margin: 0.3rem;
+  font-family: var(--Livvic);
+  font-weight: bold;
+}
+
+.panigation .pages {
+  background: var(--text-gray);
+  color: var(--white);
 }
