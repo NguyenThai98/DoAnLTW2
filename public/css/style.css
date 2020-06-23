@@ -45,10 +45,6 @@ ul {
 /* Global Classes */
 
 /* navbar */
-.nav-margin {
-  padding-bottom: 75px;
-}
-
 .tw-date {
   margin-bottom: 0px;
   font-weight: 600;
@@ -119,8 +115,6 @@ ul {
   width: 100%;
   display: flex;
   justify-content: space-around;
-  padding-top: 20px;
-  box-shadow: 0px 0px 12px 0px #333;
 }
 
 ul.nav-items.menu {
@@ -129,13 +123,14 @@ ul.nav-items.menu {
 
 .nav {
   width: 100%;
-  position: fixed;
-  z-index: 10;
+  position: relative;
   background: #ffffff;
+  transition: 0.4s;
+  margin-top: 10px;
 }
 
 ul.nav-items.menu>li {
-  padding: 15px 15px;
+  padding: 20px 15px;
   position: relative;
   transition: all 0.5s;
 }
@@ -306,6 +301,35 @@ section .container .owl-nav {
   padding: 0;
   box-sizing: border-box;
   font-family: var(--Livvic);
+}
+
+.top-header>.nav-brand,
+.top-header>.social {
+  width: 10%;
+}
+
+.top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: .4s;
+}
+
+.hide-Top-header {
+  opacity: 0;
+}
+
+.nav-margin {
+  margin-top: 20px;
+}
+
+.menuTop {
+  position: fixed;
+  box-shadow: 0 0 12px 0 #333;
+  z-index: 100;
+  top: 0;
+  transition: 0.4s;
+  margin-top: 0;
 }
 
 .title-top-view.text-center.newpost-title {
