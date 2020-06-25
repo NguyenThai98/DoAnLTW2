@@ -31,7 +31,9 @@
                             <input type="text" class="form-control" id="ngaydang" aria-describedby="emailHelp"
                                 name="ngaydang" placeholder="Ngày Đăng . . .">
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" style="
+    width: 100%;
+" class="btn btn-primary mt-4 mb-4">Submit</button>
                     </form>
                 </div>
             </div>
@@ -39,13 +41,33 @@
     </div>
     <div class="dsbaiviet">
         <h3>| Danh Sách Bài Viết</h3>
-        
+        <div class="container">
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tên Bài Viết</th>
+                            <th scope="col">Tình Trạng</th>
+                            <th scope="col">Chỉnh Sửa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
+                            <td>Chưa Được Duyệt</td>
+                            <td>
+                                <a name="editBV" class="btn btn-warning editBV" href="/post/edit/3" role="button">
+                                    <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <div class="editbaiviet">
-        <h3>| Chỉnh Sửa Bài Viết</h3>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur pariatur doloremque, vitae sit eaque quam nulla
-        corrupti error commodi eligendi aliquid dicta? Nostrum qui numquam, ab maxime rem dignissimos itaque.
-    </div>
+
 </div>
 {{#section 'js'}}
 <script src="https://cdn.tiny.cloud/1/wc2zes0u5j2hxklaov2xxoswv6griqgeb3tzkqfotvmf4yjp/tinymce/5/tinymce.min.js"
@@ -62,10 +84,24 @@
             'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
         ],
     });
+    tinymce.init({
+        selector: '#editnoidungBV',
+        height: 200,
+        plugins: 'paste image link autolink lists table media',
+        menubar: false,
+        toolbar: [
+            'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
+        ],
+    });
 </script>
 
 <script>
     $('#ngaydang').datetimepicker({
+        format: 'd/m/Y',
+        timepicker: false,
+        mask: true
+    })
+    $('#editngaydang').datetimepicker({
         format: 'd/m/Y',
         timepicker: false,
         mask: true

@@ -109,9 +109,12 @@ $(document).ready(function () {
             $('.top-header').removeClass("hide-Top-header")
         }
     });
+
+    ///js editBV
+   
 })
 
-///js login
+
 $(document).ready(function () {
     $('.login-info-box').fadeOut();
     $('.login-show').addClass('show-log-panel');

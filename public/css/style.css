@@ -305,13 +305,13 @@ section .container .owl-nav {
 
 .top-header>.nav-brand,
 .top-header>.social {
-  width: 10%;
+  width: 15%;
 }
 
 .top-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   transition: .4s;
 }
 
@@ -605,3 +605,8 @@ footer.footer {
   background: var(--text-gray);
   color: var(--white);
 }
+
+/* 
+nguoi viet bai
+
+*/

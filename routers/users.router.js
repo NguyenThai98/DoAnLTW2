@@ -16,15 +16,10 @@ router.get('/listCategories', (req, res) => {
     res.render('users/listCategories');
 })
 
-router.get('/reporter', (req, res) => {
-    res.render('users/reporter');
-})
 
 
 router.get('/is-available', async function (req, res) {
-
     const user = await userModel.singleByUserName(req.query.user);
-    console.log(user);
     if (!user) {
         return res.json(true);
     }
