@@ -1,0 +1,79 @@
+<div class="reporter text-center">
+    <div class="vietbai">
+        <h3>| Đăng Bài</h3>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="tieudeBV" aria-describedby="emailHelp"
+                                name="tieudeBV" placeholder="Tiêu Đề Bài Viết . . .">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="tomtatBV" aria-describedby="emailHelp"
+                                name="tomtatBV" placeholder="Nội Dung Tóm Tắt . . .">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="noidungBV" aria-describedby="emailHelp"
+                                name="noidungBV" placeholder="Nội Dung Chính . . .">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" id="exampleFormControlSelect1" name="loaiBaiViet">
+                                <option>Không mất phí</option>
+                                <option>Mất phí</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="tacgia" aria-describedby="emailHelp"
+                                name="tacgia">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="ngaydang" aria-describedby="emailHelp"
+                                name="ngaydang" placeholder="Ngày Đăng . . .">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dsbaiviet">
+        <h3>| Danh Sách Bài Viết</h3>
+        
+    </div>
+    <div class="editbaiviet">
+        <h3>| Chỉnh Sửa Bài Viết</h3>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur pariatur doloremque, vitae sit eaque quam nulla
+        corrupti error commodi eligendi aliquid dicta? Nostrum qui numquam, ab maxime rem dignissimos itaque.
+    </div>
+</div>
+{{#section 'js'}}
+<script src="https://cdn.tiny.cloud/1/wc2zes0u5j2hxklaov2xxoswv6griqgeb3tzkqfotvmf4yjp/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script>
+    tinymce.init({
+        selector: '#noidungBV',
+        height: 200,
+        plugins: 'paste image link autolink lists table media',
+        menubar: false,
+        toolbar: [
+            'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
+        ],
+    });
+</script>
+
+<script>
+    $('#ngaydang').datetimepicker({
+        format: 'd/m/Y',
+        timepicker: false,
+        mask: true
+    })
+</script>
+
+{{/section}}
+{{#section 'cssLogin'}}
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css">
+{{/section}}

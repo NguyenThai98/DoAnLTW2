@@ -12,7 +12,6 @@ module.exports = {
         const rows = await db.load(`select * from ${TBL_USERS} where UserName = '${username}'`);
         if (rows.length === 0)
             return null;
-
         return rows[0];
     },
     add: function(entity) {

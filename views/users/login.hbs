@@ -10,18 +10,18 @@
   });
 
   $('#frmRegister').on('submit', function (e) {
-      console.log(e);
     e.preventDefault();
     validate();
   })
 
   function validate() {
     // ... các lệnh validate khác
-
-    const user = $('#txtUsername').val();
+    console.log("da vo day")
+    const user = $('#txtUserName').val();
     console.log(user);
     $.getJSON(`/users/is-available?user=${user}`, function (data) {
       if (data === true) {
+          console.log(data)
         $('#frmRegister').off('submit').submit();
       } else {
         alert('not available');

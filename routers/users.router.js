@@ -16,7 +16,24 @@ router.get('/listCategories', (req, res) => {
     res.render('users/listCategories');
 })
 
-router.post('/register', async function(req, res) {
+router.get('/reporter', (req, res) => {
+    res.render('users/reporter');
+})
+
+
+router.get('/is-available', async function (req, res) {
+
+    const user = await userModel.singleByUserName(req.query.user);
+    console.log(user);
+    if (!user) {
+        return res.json(true);
+    }
+    res.json(false);
+})
+
+
+router.post('/register', async function (req, res) {
+
     const dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
     const password_hash = bcrypt.hashSync(req.body.Password, config.authentication.saltRounds);
     const entity = {
@@ -25,17 +42,9 @@ router.post('/register', async function(req, res) {
         TypeOfUser: 0,
         TimeRegister: dob
     }
-
     await userModel.add(entity);
-    // res.render('users/login');
+    res.render('home');
 })
 
-router.get('/is-available', async function(req, res) {
-    const user = await userModel.singleByUserName(req.query.user);
-    if (!user) {
-        return res.json(true);
-    }
-    res.json(false);
-})
 
 module.exports = router;
