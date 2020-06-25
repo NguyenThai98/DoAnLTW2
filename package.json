@@ -4,6 +4,8 @@
   "description": "",
   "main": "app.js",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "moment": "^2.27.0",
     "mysql": "^2.18.1"
   },
   "devDependencies": {

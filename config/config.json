@@ -6,5 +6,8 @@
         "password": "",
         "database": "ltw2",
         "connectionLimit": 50
+    },
+    "authentication": {
+        "saltRounds": 8
     }
 }

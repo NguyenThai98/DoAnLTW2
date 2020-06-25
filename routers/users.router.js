@@ -1,5 +1,10 @@
 const express = require('express');
+const moment = require('moment');
+const bcrypt = require('bcryptjs');
+const userModel = require('../models/user.model');
 const router = express.Router();
+const config = require('../config/config.json');
+
 
 router.get('/login', (req, res) => {
     res.render('users/login');
@@ -10,4 +15,27 @@ router.get('/categories', (req, res) => {
 router.get('/listCategories', (req, res) => {
     res.render('users/listCategories');
 })
+
+router.post('/register', async function(req, res) {
+    const dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
+    const password_hash = bcrypt.hashSync(req.body.Password, config.authentication.saltRounds);
+    const entity = {
+        UserName: req.body.UserName,
+        Password: password_hash,
+        TypeOfUser: 0,
+        TimeRegister: dob
+    }
+
+    await userModel.add(entity);
+    // res.render('users/login');
+})
+
+router.get('/is-available', async function(req, res) {
+    const user = await userModel.singleByUserName(req.query.user);
+    if (!user) {
+        return res.json(true);
+    }
+    res.json(false);
+})
+
 module.exports = router;
