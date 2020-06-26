@@ -16,7 +16,6 @@
 
   function validate() {
     // ... các lệnh validate khác
-    console.log("da vo day")
     const user = $('#txtUserName').val();
     console.log(user);
     $.getJSON(`/users/is-available?user=${user}`, function (data) {

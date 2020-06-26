@@ -3,6 +3,7 @@ const app = express();
 const PORT = 3000;
 
 require('./middlewares/view.mdw')(app);
+require('./middlewares/locals.mdw')(app);
 
 app.use(express.urlencoded({
     extended: true

@@ -277,14 +277,22 @@ section .container .owl-nav {
   outline: none;
 }
 
-.item .img-top-view a>img {
+.card-body {
+  padding: 0;
+}
+
+.card {
+  border: none;
+}
+
+.img-top-view a>img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
 .slick-slide {
-  margin: 0 20px;
+  margin: 0 10px;
 }
 
 .title-top-view.text-center {
@@ -301,6 +309,10 @@ section .container .owl-nav {
   padding: 0;
   box-sizing: border-box;
   font-family: var(--Livvic);
+}
+
+.content-post {
+  text-align: left;
 }
 
 .top-header>.nav-brand,
@@ -321,7 +333,6 @@ section .container .owl-nav {
 
 .nav-margin {
   margin-top: 20px;
-  margin-bottom: 100px;
 }
 
 .menuTop {
@@ -529,11 +540,7 @@ footer.footer {
 }
 
 /* muc lien quan */
-.muclienquan>.item {
-  width: 30%;
-  margin-left: 20px;
-  margin-bottom: 50px;
-}
+
 
 .row.muclienquan {
   display: flex;

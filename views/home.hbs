@@ -7,66 +7,23 @@
             <div class="title-post text-center">Bài viết nổi bật</div>
             <div class="content-post">
                 <div class="row">
+                    {{#each lcBVnoiBat}}
                     <div class="col-sm-12 col-md-6">
                         <div class="post-item">
                             <div class="item-img">
-                                 <a href="#"><img src="/public/assets/Blog-post/blog1.png" width="100px" height="100px"> </a>
+                                <a href="#"><img src="/public/assets/Blog-post/blog1.png" width="100px" height="100px">
+                                </a>
                             </div>
                             <div class="content-post">
-                                <div class="post-title"><a href="">Lorem ipsum dolor, sit amet consectetur
-                                        adipisicing elit</a>
+                                <div class="post-title"><a href=""> {{NewsTitle}} </a>
                                 </div>
                                 <div class="post-cre-date"> <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    22/12/2020</div>
-                                <div class="post-category"><a href="#">LMHT</a></div>
+                                    {{DatePost}} </div>
+                                <div class="post-category"><a href="#"> {{TagName}} </a></div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="post-item">
-                            <div class="item-img">
-                                 <a href="#"><img src="/public/assets/Blog-post/blog1.png" width="100px" height="100px"> </a>
-                            </div>
-                            <div class="content-post">
-                                <div class="post-title"><a href="">Lorem ipsum dolor, sit amet consectetur
-                                        adipisicing elit</a>
-                                </div>
-                                <div class="post-cre-date"> <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    22/12/2020</div>
-                                <div class="post-category"><a href="#">LMHT</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="post-item">
-                            <div class="item-img">
-                                 <a href="#"><img src="/public/assets/Blog-post/blog1.png" width="100px" height="100px"> </a>
-                            </div>
-                            <div class="content-post">
-                                <div class="post-title"><a href="">Lorem ipsum dolor, sit amet consectetur
-                                        adipisicing elit</a>
-                                </div>
-                                <div class="post-cre-date"> <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    22/12/2020</div>
-                                <div class="post-category"><a href="#">LMHT</a></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 col-md-6">
-                        <div class="post-item">
-                            <div class="item-img">
-                                 <a href="#"><img src="/public/assets/Blog-post/blog1.png" width="100px" height="100px"> </a>
-                            </div>
-                            <div class="content-post">
-                                <div class="post-title"><a href="">Lorem ipsum dolor, sit amet consectetur
-                                        adipisicing elit</a>
-                                </div>
-                                <div class="post-cre-date"> <i class="fa fa-calendar" aria-hidden="true"></i>
-                                    22/12/2020</div>
-                                <div class="post-category"><a href="#">LMHT</a></div>
-                            </div>
-                        </div>
-                    </div>
+                    {{/each}}
 
                 </div>
             </div>
@@ -84,67 +41,25 @@
                     Top 10 view
                 </div>
                 <div class="slick-multiline-top-view">
-                    <div class="item">
-                        <div class="img-top-view">
-                            <a href="#"><img src="/public/assets/Blog-post/blog1.png"> </a>
-                        </div>
-                        <div class="content-item-top-view">
-                            <div class="tw-title"><a href="#">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                    elit.</a>
-                            </div>
-                            <div class="tw-date">02/2/2000</div>
-                            <div class="tw-category"><a href="#">LMHT</a></div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img-top-view">
-                            <a href="#"><img src="/public/assets/Blog-post/blog1.png"> </a>
-                        </div>
-                        <div class="content-item-top-view">
-                            <div class="tw-title"><a href="#">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                    elit.</a>
-                            </div>
-                            <div class="tw-date">02/2/2000</div>
-                            <div class="tw-category"><a href="#">LMHT</a></div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img-top-view">
-                            <a href="#"><img src="/public/assets/Blog-post/blog1.png"> </a>
-                        </div>
-                        <div class="content-item-top-view">
-                            <div class="tw-title"><a href="#">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                    elit.</a>
-                            </div>
-                            <div class="tw-date">02/2/2000</div>
-                            <div class="tw-category"><a href="#">LMHT</a></div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img-top-view">
-                            <a href="#"><img src="/public/assets/Blog-post/blog1.png"> </a>
-                        </div>
-                        <div class="content-item-top-view">
-                            <div class="tw-title"><a href="#">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                    elit.</a>
-                            </div>
-                            <div class="tw-date">02/2/2000</div>
-                            <div class="tw-category"><a href="#">LMHT</a></div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img-top-view">
-                            <a href="#"><img src="/public/assets/Blog-post/blog1.png"> </a>
-                        </div>
-                        <div class="content-item-top-view">
-                            <div class="tw-title"><a href="#">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                    elit.</a>
-                            </div>
-                            <div class="tw-date">02/2/2000</div>
-                            <div class="tw-category"><a href="#">LMHT</a></div>
-                        </div>
-                    </div>
+                    {{#each  lcmuoiBVnoibat}}
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div class="card-body">
 
+                                <div class="img-top-view">
+                                    <a href="#"><img src="/public/assets/Blog-post/blog1.png"> </a>
+                                </div>
+                                <div class="content-item-top-view">
+                                    <div class="tw-title"><a href="#"> {{NewsTitle}} </a>
+                                    </div>
+                                    <div class="tw-date"> {{DatePost}}</div>
+                                    <div class="tw-category"><a href="#">#{{TagName}}</a></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
                 </div>
             </div>
         </div>

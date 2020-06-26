@@ -28,8 +28,8 @@ $(document).ready(function () {
         infinite: true,
         slidesToShow: 4,
         slidesToScroll: 3,
-        autoplay: true,
-        autoplaySpeed: 2000,
+        // autoplay: true,
+        // autoplaySpeed: 2000,
         responsive: [{
             breakpoint: 1024,
             settings: {
@@ -110,8 +110,9 @@ $(document).ready(function () {
         }
     });
 
-    ///js editBV
-   
+    ///js load
+    
+
 })
 
 
