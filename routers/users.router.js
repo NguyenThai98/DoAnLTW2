@@ -15,6 +15,9 @@ router.get('/categories', (req, res) => {
 router.get('/listCategories', (req, res) => {
     res.render('users/listCategories');
 })
+router.get('/resetpass', (req, res) => {
+    res.render('users/resetpass');
+})
 
 
 
