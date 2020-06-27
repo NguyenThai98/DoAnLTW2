@@ -11,7 +11,7 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="post-item">
                             <div class="item-img">
-                                <a href="#"><img src="/public/assets/Blog-post/blog1.png" width="100px" height="100px">
+                                <a href="#"><img src="/public/assets/images/{{Avatar}}" width="100px" height="100px">
                                 </a>
                             </div>
                             <div class="content-post">
@@ -43,19 +43,15 @@
                 <div class="slick-multiline-top-view">
                     {{#each  lcmuoiBVnoibat}}
                     <div class="col-sm-4">
-                        <div class="card">
-                            <div class="card-body">
-
-                                <div class="img-top-view">
-                                    <a href="#"><img src="/public/assets/Blog-post/blog1.png"> </a>
+                        <div class="item">
+                            <div class="img-top-view">
+                                <a href="#"><img src="/public/assets/images/{{Avatar}}"> </a>
+                            </div>
+                            <div class="content-item-top-view">
+                                <div class="tw-title"><a href="#"> {{NewsTitle}} </a>
                                 </div>
-                                <div class="content-item-top-view">
-                                    <div class="tw-title"><a href="#"> {{NewsTitle}} </a>
-                                    </div>
-                                    <div class="tw-date"> {{DatePost}}</div>
-                                    <div class="tw-category"><a href="#">#{{TagName}}</a></div>
-                                </div>
-
+                                <div class="tw-date"> {{DatePost}}</div>
+                                <div class="tw-category"><a href="#">#{{TagName}}</a></div>
                             </div>
                         </div>
                     </div>
@@ -75,67 +71,21 @@
                     Bài Viết Mới Nhất
                 </div>
                 <div class="slick-multiline-top-new">
-                    <div class="item">
-                        <div class="img-top-view">
-                            <a href="#"><img src="/public/assets/Blog-post/blog1.png"> </a>
-                        </div>
-                        <div class="content-item-top-view">
-                            <div class="tw-title"><a href="#">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                    elit.</a>
+                    {{#each lcBVmoiNhat}}
+                    <div class="ntt-col">
+                        <div class="item">
+                            <div class="img-top-view">
+                                <a href="#"><img src="/public/assets/images/{{Avatar}}"> </a>
                             </div>
-                            <div class="tw-date">02/2/2000</div>
-                            <div class="tw-category"><a href="#">LMHT</a></div>
+                            <div class="content-item-top-view">
+                                <div class="tw-title"><a href="#"> {{NewsTitle}} </a>
+                                </div>
+                                <div class="tw-date"> {{DatePost}} </div>
+                                <div class="tw-category"><a href="#"> #{{TagName}} </a></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="img-top-view">
-                            <a href="#"><img src="/public/assets/Blog-post/blog1.png"> </a>
-                        </div>
-                        <div class="content-item-top-view">
-                            <div class="tw-title"><a href="#">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                    elit.</a>
-                            </div>
-                            <div class="tw-date">02/2/2000</div>
-                            <div class="tw-category"><a href="#">LMHT</a></div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img-top-view">
-                            <a href="#"><img src="/public/assets/Blog-post/blog1.png"> </a>
-                        </div>
-                        <div class="content-item-top-view">
-                            <div class="tw-title"><a href="#">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                    elit.</a>
-                            </div>
-                            <div class="tw-date">02/2/2000</div>
-                            <div class="tw-category"><a href="#">LMHT</a></div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img-top-view">
-                            <a href="#"><img src="/public/assets/Blog-post/blog1.png"> </a>
-                        </div>
-                        <div class="content-item-top-view">
-                            <div class="tw-title"><a href="#">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                    elit.</a>
-                            </div>
-                            <div class="tw-date">02/2/2000</div>
-                            <div class="tw-category"><a href="#">LMHT</a></div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="img-top-view">
-                            <a href="#"><img src="/public/assets/Blog-post/blog1.png"> </a>
-                        </div>
-                        <div class="content-item-top-view">
-                            <div class="tw-title"><a href="#">Lorem ipsum, dolor sit amet consectetur adipisicing
-                                    elit.</a>
-                            </div>
-                            <div class="tw-date">02/2/2000</div>
-                            <div class="tw-category"><a href="#">LMHT</a></div>
-                        </div>
-                    </div>
-
+                    {{/each}}
                 </div>
             </div>
         </div>
@@ -152,16 +102,10 @@
             top 10 chuyên mục
         </h3>
         <ul class="list-chuyenmuc">
-            <li><a href="#">#Kinh Doanh</a></li>
-            <li><a href="#">#Kinh Doanh</a></li>
-            <li><a href="#">#Kinh Doanh</a></li>
-            <li><a href="#">#Kinh Doanh</a></li>
-            <li><a href="#">#Kinh Doanh</a></li>
-            <li><a href="#">#Kinh Doanh</a></li>
-            <li><a href="#">#Kinh Doanh</a></li>
-            <li><a href="#">#Kinh Doanh</a></li>
-            <li><a href="#">#Kinh Doanh</a></li>
-            <li><a href="#">#Kinh Doanh</a></li>
+            {{#each  lcmuoichuyenmuc}}
+            <li><a href="#"># {{TagName}} </a></li>
+            {{/each}}
+
         </ul>
     </div>
 </section>

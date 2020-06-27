@@ -17,6 +17,12 @@ module.exports = {
     chonBV10NoiBat: function () {
         return db.load(`SELECT * FROM category c join category_child cc on c.CatID = cc.CatID join news n on cc.CatChild_ID = n.CatChild_ID join tag t on t.NewsID = n.NewsID order by View DESC limit 10`);
     },
+    BVmoiNhat: function () {
+        return db.load(`SELECT * FROM ${TBL_CATEGORY_NEWS} n JOIN ${TBL_CATEGORY_TAG} t on n.NewsID = t.NewsID ORDER BY DatePost DESC LIMIT 10`);
+    },
+    muoichuyenmuc: function(){
+        return db.load(`SELECT DISTINCT(TagName) from ${TBL_CATEGORY_TAG} LIMIT 10`)
+    },
     singleByUserName: async function (username) {
         const rows = await db.load(`select * from ${TBL_USERS} where UserName = '${username}'`);
         if (rows.length === 0)
@@ -37,4 +43,5 @@ module.exports = {
         const condition = { id }
         return db.del(TBL_USERS, condition);
     }
+    /// chi tiet tag SELECT t.NewsID,TagName,Content FROM tag t JOIN news n on t.NewsID = n.NewsID WHERE t.TagName = 'Thời Sự'
 };
