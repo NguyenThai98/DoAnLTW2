@@ -99,10 +99,6 @@ ul {
   color: #fff;
 }
 
-.child-menu>li {
-  /* border: 1px solid #33333373; */
-}
-
 .nav-brand>a {
   font-weight: 500;
   text-transform: uppercase;
@@ -375,6 +371,7 @@ section .container .owl-nav {
 
 .nav-margin {
   margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 .menuTop {
