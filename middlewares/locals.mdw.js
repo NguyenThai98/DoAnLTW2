@@ -10,12 +10,10 @@ module.exports = function (app) {
     app.use(async function (req, res, next) {
         const data = cache.get('bvnoibat');
         if (!data) {
-            console.log('lay data tu db');
             const bvnoibat = await localModels.chonBVNoiBat();
             res.locals.lcBVnoiBat = bvnoibat;
             cache.set('bvnoibat', bvnoibat)
         } else {
-            console.log('lay data tu cache');
             res.locals.lcBVnoiBat = data;
         }
         next();

@@ -1,0 +1,75 @@
+<div class="categories">
+    <div class="container">
+        {{#each sanpham}}
+        <h3 class="mt-4">| {{CatName}}</h3>
+        <div class="row">
+            <div class="col-12">
+                <div class="details-categories">
+                    <div class="details-img">
+                        <a href="#"><img src="/public/assets/images/{{Avatar}}"> </a>
+                    </div>
+                    <div class="details-content">
+                        <div class="ct-title font-weight-bold">
+                            {{NewsTitle}}
+                        </div>
+                        <div class="ct-date">
+                            {{DatePost}}
+                        </div>
+                        <div class="ct-content ">
+                            {{Content}}
+                        </div>
+                        <div class="ct-tag font-weight-bold">
+                            #{{TagName}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+
+        <h3 class="mt-4">| Đánh Giá</h3>
+        <div class="row">
+            <div class="col">
+                <div class="ctiet-danhgia">
+                    <div class="nd-danhgia">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem esse delectus
+                        fuga quo magni cupiditate autem velit tempore sequi quam dolor ipsam error, accusamus
+                        dignissimos consequatur provident vero tenetur distinctio!</div>
+                    <div class="date-dg"><i>20/10/2002</i></div>
+                    <div class="name-docgia"><b>Nguyễn Thái</b></div>
+                </div>
+                <form action="">
+                    <div class="form-group">
+                        <label for=""></label>
+                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
+                            placeholder="Nhập...">
+                        <small id="helpId" class="form-text text-muted">Nội Dung Đánh Giá</small>
+                        <button type="submit" class="btn btn-success">
+                            Gửi
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <h3 class="mb-4">| Chủ Đề Tương Tự</h3>
+
+        <div class="row muclienquan">
+            {{#each bvlienquan}}
+            <div class="col-sm-3 mb-4">
+                <div class="item">
+                    <div class="img-top-view-muclienquan">
+                        <a href="/post/detailsCategory/{{NewsID}}"><img src="/public/assets/images/{{Avatar}}"> </a>
+                    </div>
+                    <div class="content-item-top-view-muclienquan">
+                        <div class="tw-title">
+                            <a href="/post/detailsCategory/{{NewsID}}"> {{NewsTitle}} </a>
+                        </div>
+                        <div class="tw-date"> {{DatePost}} </div>
+                        <div class="tw-category"><a href="#"> {{TagName}} </a></div>
+                    </div>
+                </div>
+
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

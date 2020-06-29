@@ -1,0 +1,48 @@
+<section>
+    <div class="topTenview">
+        <div class="container">
+            <div class="ctent-list">
+                {{#each catName}}
+                <h3 class="mt-4 mb-4 text-center"> | {{CatName}} | </h3>
+                {{/each}}
+                <div class="row">
+                    {{#each list}}
+                    <hr>
+
+                    <div class="col-6 list-ct">
+                        <div class="item">
+                            <div class="img-top-view">
+                                <a href="#"><img src="/public/assets/images/{{Avatar}}"> </a>
+                            </div>
+                            <div class="content-item-top-view">
+                                <div class="tw-title"><a href="#"> {{NewsTitle}} </a>
+                                </div>
+                                <div class="tw-chuyemuc"><a href="#">{{CatName}} </a></div>
+                                <div class="tw-category"><a href="#"> #{{TagName}} </a></div>
+                                <div class="tw-date"> {{DatePost}} </div>
+                                <div class="tw-abstract"> {{Abstract}} </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+                <div class="panigation ">
+
+                    <a href="?page={{prev}}" class=" {{#if can_go_prev}}disabled
+                    {{/if}}"><i class="fa fa-chevron-left " aria-hidden="true"></i></a>
+                    {{#each pages_item}}
+                    {{#if isActive}}
+                    <a href="?page={{value}}" class="pages active"> {{value}} </a>
+                    {{else}}
+                    <a href="?page={{value}}" class="pages"> {{value}} </a>
+                    {{/if}}
+
+                    {{/each}}
+                    <a href="?page={{next}}" class=" {{#if can_go_next}}disabled
+                    {{/if}}"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

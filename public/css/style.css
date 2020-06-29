@@ -23,6 +23,10 @@
   color: var(--text-gray);
 }
 
+a.pages.active {
+  background: black;
+}
+
 span {
   font-family: var(--Abel);
 }
@@ -58,8 +62,6 @@ ul {
 .content-item-top-view {
   text-align: center;
 }
-
-
 
 .post-item .item-img a>img {
   border-radius: 10px;
@@ -362,7 +364,7 @@ section .container .owl-nav {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 .hide-Top-header {
@@ -580,15 +582,13 @@ footer.footer {
 
 /* muc lien quan */
 
-
 .row.muclienquan {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 .details-categories {
-  width: 50%;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -617,15 +617,34 @@ footer.footer {
 /* ctiet-danhgia xxx*/
 
 /* list category */
+.panigation a.disabled {
+  pointer-events: none;
+  opacity: 0;
+}
 
-.list-ct {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+.img-top-view-muclienquan {
+  position: relative;
+}
+
+.img-top-view-muclienquan::before {
+  content: "";
+  display: block;
+  padding-top: 100%;
+}
+
+.img-top-view-muclienquan a,
+.img-top-view-muclienquan a>img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 .list-ct>.item {
-  width: 20%;
   margin-right: 20px;
   margin-bottom: 25px;
 }
@@ -662,7 +681,11 @@ footer.footer {
   color: #333;
   background-color: #8e8e8e;
   border-color: #8e8e8e;
-  transition: .3s;
+  transition: 0.3s;
+}
+
+.img-top-view-muclienquan a>img {
+  width: 100%;
 }
 
 /* 
