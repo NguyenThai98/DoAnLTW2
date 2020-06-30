@@ -19,8 +19,6 @@ router.get('/resetpass', (req, res) => {
     res.render('users/resetpass');
 })
 
-
-
 router.get('/is-available', async function(req, res) {
     const user = await userModel.singleByUserName(req.query.user);
     if (!user) {
@@ -29,9 +27,7 @@ router.get('/is-available', async function(req, res) {
     res.json(false);
 })
 
-
 router.post('/register', async function(req, res) {
-
     const dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
     const password_hash = bcrypt.hashSync(req.body.Password, config.authentication.saltRounds);
     const entity = {
