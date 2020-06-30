@@ -20,7 +20,8 @@
                                 </div>
                                 <div class="post-cre-date"> <i class="fa fa-calendar" aria-hidden="true"></i>
                                     {{DatePost}} </div>
-                                <div class="post-category"><a href="#"> {{TagName}} </a></div>
+                                <div class="post-category"><a href="/post/listCategories/{{CatID}}"> {{CatName}} </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -53,7 +54,7 @@
                                 <div class="tw-title"><a href="/post/detailsCategory/{{NewsID}}"> {{NewsTitle}} </a>
                                 </div>
                                 <div class="tw-date"> {{DatePost}}</div>
-                                <div class="tw-category"><a href="#">#{{TagName}}</a></div>
+                                <div class="tw-category"><a href="/post/listTag/?tagName={{TagName}}">#{{TagName}}</a></div>
                             </div>
                         </div>
                     </div>
@@ -84,7 +85,7 @@
                                 <div class="tw-title"><a href="/post/detailsCategory/{{NewsID}}"> {{NewsTitle}} </a>
                                 </div>
                                 <div class="tw-date"> {{DatePost}} </div>
-                                <div class="tw-category"><a href="#"> #{{TagName}} </a></div>
+                                <div class="tw-category"><a href="/post/listTag/?tagName={{TagName}}"> #{{TagName}} </a></div>
                             </div>
                         </div>
                     </div>
@@ -106,7 +107,7 @@
         </h3>
         <ul class="list-chuyenmuc">
             {{#each  lcmuoichuyenmuc}}
-            <li><a href="#"># {{TagName}} </a></li>
+            <li><a href="/post/listTag/?tagName={{TagName}}"># {{TagName}} </a></li>
             {{/each}}
 
         </ul>
