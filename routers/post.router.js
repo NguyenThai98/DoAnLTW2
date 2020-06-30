@@ -35,7 +35,7 @@ router.get('/listCategories/:id', async (req, res) => {
     }
     res.render('post/listCategories', {
         list: row,
-        empty: list.length == 0,
+        empty: row.length == 0,
         catName,
         pages_item,
         next: +page + 1,
