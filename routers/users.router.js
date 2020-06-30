@@ -21,7 +21,7 @@ router.get('/resetpass', (req, res) => {
 
 
 
-router.get('/is-available', async function (req, res) {
+router.get('/is-available', async function(req, res) {
     const user = await userModel.singleByUserName(req.query.user);
     if (!user) {
         return res.json(true);
@@ -30,7 +30,7 @@ router.get('/is-available', async function (req, res) {
 })
 
 
-router.post('/register', async function (req, res) {
+router.post('/register', async function(req, res) {
 
     const dob = moment(req.body.dob, 'DD/MM/YYYY').format('YYYY-MM-DD');
     const password_hash = bcrypt.hashSync(req.body.Password, config.authentication.saltRounds);
@@ -38,7 +38,8 @@ router.post('/register', async function (req, res) {
         UserName: req.body.UserName,
         Password: password_hash,
         TypeOfUser: 0,
-        TimeRegister: dob
+        TimeRegister: dob,
+        Email: req.body.Email
     }
     await userModel.add(entity);
     res.render('home');
