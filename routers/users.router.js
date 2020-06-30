@@ -12,9 +12,7 @@ router.get('/login', (req, res) => {
 router.get('/categories', (req, res) => {
     res.render('users/categories');
 })
-router.get('/listCategories', (req, res) => {
-    res.render('users/listCategories');
-})
+
 router.get('/resetpass', (req, res) => {
     res.render('users/resetpass');
 })
