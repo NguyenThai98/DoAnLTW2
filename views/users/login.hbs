@@ -17,13 +17,18 @@
   function validate() {
     // ... các lệnh validate khác
     const user = $('#txtUserName').val();
-    console.log(user);
+    const pw = $('#txtPassword').val();
+    const rpw = $('#txtConfirm').val();
+
     $.getJSON(`/users/is-available?user=${user}`, function (data) {
       if (data === true) {
-          console.log(data)
-        $('#frmRegister').off('submit').submit();
+        if(pw!= rpw){
+            alert('Mật khẩu không giống nhau!');
+        }else{
+            $('#frmRegister').off('submit').submit();
+        }
       } else {
-        alert('not available');
+            alert('Tên đăng nhập đã tồn tại');
       }
     })
   }
@@ -59,6 +64,7 @@
                 <input type="text" id="txtUserName" placeholder="Tên đăng nhập" name="UserName">
                 <input type="password" id="txtPassword" placeholder="Mật khẩu" name="Password">
                 <input type="password" id="txtConfirm" placeholder="Nhập lại mật khẩu">
+                <input type="text" id="txtEmail" placeholder="Email" name="Email">
                 <input type="submit" value="Đăng Ký">
             </form>
         </div>
