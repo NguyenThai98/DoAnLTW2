@@ -4,6 +4,7 @@ const PORT = 3000;
 
 require('./middlewares/view.mdw')(app);
 require('./middlewares/locals.mdw')(app);
+require('./middlewares/session.mdw')(app);
 
 app.use(express.urlencoded({
     extended: true
@@ -14,11 +15,11 @@ app.use('/post', require('./routers/post.router'));
 
 app.use('/public', express.static('public'));
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
     res.render('home');
 })
 
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     console.error(err.stack);
     res.status(500).render('500', {
         layout: false
