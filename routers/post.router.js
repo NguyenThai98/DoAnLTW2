@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const postModels = require('../models/post.models');
-router.get('/reporter', (req, res) => {
+const restrict = require('../middlewares/auth.mdw');
+router.get('/reporter', restrict, (req, res) => {
     res.render('post/reporter');
 })
-router.get('/listCategories/:id', async (req, res) => {
+router.get('/listCategories/:id', restrict, async (req, res) => {
     let id = req.params.id;
     const limit = 2;
 
@@ -44,10 +45,10 @@ router.get('/listCategories/:id', async (req, res) => {
         can_go_next: page >= nTrang,
     });
 })
-router.get('/edit', (req, res) => {
+router.get('/edit', restrict, (req, res) => {
     res.render('post/editPost');
 })
-router.get('/listChild/:id', async (req, res) => {
+router.get('/listChild/:id', restrict, async (req, res) => {
     let id = req.params.id;
     const limit = 1;
     let page = req.query.page || 1;
@@ -85,7 +86,7 @@ router.get('/listChild/:id', async (req, res) => {
         can_go_next: page >= nTrang,
     });
 })
-router.get('/listTag', async (req, res) => {
+router.get('/listTag', restrict, async (req, res) => {
     const nameTag = req.query.tagName;
     const row = await postModels.listTag(nameTag);
     let TagName = [];
@@ -101,7 +102,7 @@ router.get('/listTag', async (req, res) => {
         TagName,
     });
 })
-router.get('/detailsCategory/:id', async (req, res) => {
+router.get('/detailsCategory/:id', restrict, async (req, res) => {
     const id = +req.params.id;
     const row = await postModels.chitietsp(id);
     const row2 = await postModels.bvlienquan();

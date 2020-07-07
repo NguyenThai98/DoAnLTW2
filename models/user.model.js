@@ -17,11 +17,15 @@ module.exports = {
     add: function (entity) {
         return db.add(TBL_USERS, entity);
     },
-    patch: function (entity) {
-        const condition = {
-            id: entity.id
+    updateTypeUser: function (typeUser, idUser) {
+        let entity = {
+            TypeOfUser: typeUser
         }
-        delete entity.id;
+        let condition = {
+            UserID: idUser
+        }
+        console.log(entity, condition);
+
         return db.patch(TBL_USERS, entity, condition);
     },
     del: function (id) {

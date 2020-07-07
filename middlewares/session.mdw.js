@@ -6,7 +6,7 @@ module.exports = function (app) {
         resave: false,
         saveUninitialized: true,
         cookie: {
-            maxAge: 1000,
+            // maxAge: 1000,
         }
     }))
 }

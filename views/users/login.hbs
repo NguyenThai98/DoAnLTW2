@@ -51,13 +51,18 @@
 
     <div class="white-panel">
         <div class="login-show">
+            {{#if error}}
+            <b> {{error}} </b>
+            {{/if}}
             <h2>ĐĂNG NHẬP</h2>
             <form action="/users/login" method="POST">
                 <input type="text" placeholder="Tên đăng nhập" name="UserName">
                 <input type="password" placeholder="Mật khẩu" name="Password">
                 <input type="submit" value="Đăng nhập">
             </form>
+
             <a href="/users/resetpass">Bạn đã quên mật khẩu?</a>
+            <a href="/users/extension">Gia hạn tài khoản?</a>
         </div>
         <div class="register-show">
             <h2>ĐĂNG KÝ</h2>

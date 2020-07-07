@@ -2,13 +2,15 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-require('./middlewares/view.mdw')(app);
-require('./middlewares/locals.mdw')(app);
-require('./middlewares/session.mdw')(app);
-
 app.use(express.urlencoded({
     extended: true
 }));
+require('./middlewares/session.mdw')(app);
+require('./middlewares/view.mdw')(app);
+require('./middlewares/locals.mdw')(app);
+
+
+
 
 app.use('/users', require('./routers/users.router'));
 app.use('/post', require('./routers/post.router'));

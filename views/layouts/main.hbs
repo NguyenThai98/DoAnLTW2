@@ -37,10 +37,14 @@
                         placeholder="Tìm Kiếm Bài Viết...">
                 </form>
             </div>
+            <form action="/users/logout" id="logout" method="POST"></form>
             <div class="social text-gray">
-                <i class="fa fa-user-circle" aria-hidden="true"></i>
+                {{#if lcIsAuthenticated}}
+                <span>Hello</span> <b> <a href="/users/profile">{{lcAuthUser.UserName}}</a> !</b>
+                <a href="javascript: $('#logout').submit()">Đăng Xuất</i></a>
+                {{else}}
                 <a href="/users/login">Đăng Nhập |</i></a>
-                <a href="/users/logout">Đăng Xuất</i></a>
+                {{/if}}
             </div>
         </div>
         <div class="row">
