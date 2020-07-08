@@ -15,7 +15,7 @@ module.exports = {
         return db.load(`SELECT c.CatID, n.Abstract, n.NewsID, n.Avatar,n.NewsTitle,n.DatePost,n.Content,c.CatName,t.TagName FROM news n join category_child cc on n.CatChild_ID = cc.CatChild_ID join category c on cc.CatID = c.CatID join tag t on t.TagID = n.TagID WHERE c.CatID = ${id}  LIMIT ${limit} OFFSET ${offset}`)
     },
     trangSanphamCon: function (id, limit, offset) {
-        return db.load(`SELECT n.Avatar, n.NewsID,n.NewsTitle,t.TagName,n.Content,c.CatName,n.DatePost FROM news n JOIN category_child cc on n.CatChild_ID = cc.CatChild_ID JOIN category c on c.CatID = cc.CatID join tag t on t.TagID = n.TagID  WHERE n.CatChild_ID = ${id} LIMIT ${limit} OFFSET ${offset}`)
+        return db.load(`SELECT n.Avatar, n.NewsID,n.NewsTitle,t.TagName,n.Content,c.CatName,n.DatePost, cc.CatChildName FROM news n JOIN category_child cc on n.CatChild_ID = cc.CatChild_ID JOIN category c on c.CatID = cc.CatID join tag t on t.TagID = n.TagID  WHERE n.CatChild_ID = ${id} LIMIT ${limit} OFFSET ${offset}`)
     },
     tongtrang: async function (id) {
         const totals = await db.load(`SELECT COUNT(*) as totalPage FROM news n JOIN category_child cc on n.CatChild_ID = cc.CatChild_ID join category c on cc.CatID = c.CatID WHERE c.CatID = ${id}`);

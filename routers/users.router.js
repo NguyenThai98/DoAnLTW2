@@ -10,9 +10,10 @@ router.get('/login', (req, res) => {
     res.render('users/login');
 })
 router.post('/login', async (req, res) => {
-    const username = req.body.UserName;
+    const username = req.body.UserNameLogin;
     let user = await userModel.singleByUserName(username);
-    if (user) {
+    const rs = bcrypt.compare(req.body.PasswordLogin, user.Password);
+    if (user && rs) {
         let TimeLogin = new Date().getTime();
         let idUser = user.UserID;
         let phut = Math.floor((TimeLogin - +user.TimeRegister) / 60 / 1000);
@@ -78,7 +79,7 @@ router.post('/register', async function (req, res) {
     dob = dob.getTime();
     console.log(dob);
 
-    const password_hash = bcrypt.hashSync(req.body.Password, config.authentication.saltRounds);
+    const password_hash = bcrypt.hash(req.body.Password, config.authentication.saltRounds);
     const entity = {
         UserName: req.body.UserName,
         Password: password_hash,

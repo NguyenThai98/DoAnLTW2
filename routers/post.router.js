@@ -34,7 +34,7 @@ router.get('/listCategories/:id', restrict, async (req, res) => {
         catName.push(item);
         break;
     }
-    res.render('post/listCategories', {
+    res.render('post/listCategoriesParent', {
         list: row,
         empty: row.length == 0,
         catName,
@@ -68,17 +68,17 @@ router.get('/listChild/:id', restrict, async (req, res) => {
         }
         pages_item.push(item);
     }
-    let catName = [];
+    let CatChildName = [];
     for (let i = 0; i < row.length; i++) {
         const item = {
-            CatName: row[i].CatName,
+            CatChildName: row[i].CatChildName,
         }
-        catName.push(item);
+        CatChildName.push(item);
         break;
     }
     res.render('post/listCategories', {
         list: row,
-        catName,
+        CatChildName,
         pages_item,
         next: +page + 1,
         prev: +page - 1,

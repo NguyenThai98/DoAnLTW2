@@ -12,13 +12,21 @@
         e.preventDefault();
         validate();
     })
-
+    $('#frmLogin').on('submit', function (e) {
+        e.preventDefault();
+        if (validateLogin()) {
+            $('#frmLogin').off('submit').submit();
+        }
+    })
     function validate() {
         // ... các lệnh validate khác
         const user = $('#txtUserName').val();
         const pw = $('#txtPassword').val();
         const rpw = $('#txtConfirm').val();
-
+        if (user == "" || pw == "" || rpw == "") {
+            alert("please full in the fields");
+            return false;
+        }
         $.getJSON(`/users/is-available?user=${user}`, function (data) {
             if (data === true) {
                 if (pw != rpw) {
@@ -30,6 +38,22 @@
                 alert('Tên đăng nhập đã tồn tại');
             }
         })
+    }
+    function validateLogin() {
+        // ... các lệnh validate khác
+        const user = $('#UserName').val();
+        const pw = $('#Password').val();
+        console.log(pw + "-----" + user);
+        // Bước 2: Kiểm tra dữ liệu hợp lệ hay không
+        if (user == "") {
+            alert('Bạn chưa nhập tên đăng nhập');
+            return false;
+        }
+        if (pw == "") {
+            alert('Bạn chưa nhập mật khẩu');
+            return false;
+        }
+        return true;
     }
 </script>
 {{/section}}
@@ -55,13 +79,13 @@
             <b> {{error}} </b>
             {{/if}}
             <h2>ĐĂNG NHẬP</h2>
-            <form action="/users/login" method="POST">
-                <input type="text" placeholder="Tên đăng nhập" name="UserName">
-                <input type="password" placeholder="Mật khẩu" name="Password">
+            <form id="frmLogin" action="/users/login" method="POST">
+                <input type="text" id="UserName" placeholder="Tên đăng nhập" name="UserNameLogin">
+                <input type="password" id="Password" placeholder="Mật khẩu" name="PasswordLogin">
                 <input type="submit" value="Đăng nhập">
             </form>
 
-            <a href="/users/resetpass">Bạn đã quên mật khẩu?</a>
+            <a href="/users/resetpass">Bạn đã quên mật khẩu?</a> <br>
             <a href="/users/extension">Gia hạn tài khoản?</a>
         </div>
         <div class="register-show">
