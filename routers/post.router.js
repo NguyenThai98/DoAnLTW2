@@ -27,6 +27,8 @@ router.get('/listCategories/:id', restrict, async (req, res) => {
         pages_item.push(item);
     }
     let catName = [];
+    let listIsPremium = [];
+    let listNotPremium = [];
     for (let i = 0; i < row.length; i++) {
         const item = {
             CatName: row[i].CatName,
@@ -34,10 +36,27 @@ router.get('/listCategories/:id', restrict, async (req, res) => {
         catName.push(item);
         break;
     }
+    for (let i = 0; i < row.length; i++) {
+        if (row[i].IsPremium == 1) {
+            listIsPremium.push(row[i]);
+        } else {
+            listNotPremium.push(row[i]);
+        }
+    }
+    let typeUser = req.session.authUser.TypeOfUser;
+
+    console.log(req.session.authUser.UserName);
+
+    console.log("user----" + req.session.authUser.TypeOfUser);
+
+
     res.render('post/listCategoriesParent', {
+        listIsPremium,
+        listNotPremium,
         list: row,
         empty: row.length == 0,
         catName,
+        typeUser: typeUser == 0,
         pages_item,
         next: +page + 1,
         prev: +page - 1,

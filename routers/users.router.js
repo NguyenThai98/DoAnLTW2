@@ -1,5 +1,5 @@
 const express = require('express');
-const moment = require('moment');
+// const moment = require('moment');
 const bcrypt = require('bcryptjs');
 const userModel = require('../models/user.model');
 const router = express.Router();
@@ -10,9 +10,13 @@ router.get('/login', (req, res) => {
     res.render('users/login');
 })
 router.post('/login', async (req, res) => {
-    const username = req.body.UserNameLogin;
+    let username = req.body.UserNameLogin;
+    let pw = req.body.PasswordLogin;
     let user = await userModel.singleByUserName(username);
-    const rs = bcrypt.compare(req.body.PasswordLogin, user.Password);
+    let pwh = user.Password;
+
+    let rs = await bcrypt.compareSync(pw, pwh);
+
     if (user && rs) {
         let TimeLogin = new Date().getTime();
         let idUser = user.UserID;
@@ -29,7 +33,6 @@ router.post('/login', async (req, res) => {
             const url = req.query.retUrl || '/';
             res.redirect(url);
         }
-
     } else {
         res.render('users/login', {
             error: "username or password invalid!",
@@ -43,10 +46,20 @@ router.get('/extension', (req, res) => {
 router.post('/extension', async (req, res) => {
     const username = req.body.extension;
     let user = await userModel.singleByUserName(username);
-    let idUser = user.UserID;
-
-    await userModel.updateTypeUser(0, idUser);
-    res.redirect('/users/login');
+    if (user == null) {
+        res.render('users/login', {
+            error: "Tài Khoản chưa đăng ký!",
+        })
+    } else {
+        let idUser = user.UserID;
+        await userModel.updateTypeUser(0, idUser);
+        delete user.Password;
+        req.session.isAuthenticated = true;
+        req.session.authUser = user;
+        res.render('users/login', {
+            error: "Gia hạn thành công vui lòng đăng nhập lại !!!"
+        });
+    }
 })
 // router.get('/categories', (req, res) => {
 //     res.render('users/categories');
@@ -79,7 +92,7 @@ router.post('/register', async function (req, res) {
     dob = dob.getTime();
     console.log(dob);
 
-    const password_hash = bcrypt.hash(req.body.Password, config.authentication.saltRounds);
+    const password_hash = bcrypt.hashSync(req.body.Password, config.authentication.saltRounds);
     const entity = {
         UserName: req.body.UserName,
         Password: password_hash,

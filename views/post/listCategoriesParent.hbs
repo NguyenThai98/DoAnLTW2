@@ -9,8 +9,8 @@
                     {{#if empty}}
                     <p>Không có dữ liệu</p>
                     {{else}}
+                    {{#if typeUser}}
                     {{#each list}}
-                    <hr>
                     <div class="col list-ct">
                         <div class="item">
                             <div class="img-top-view">
@@ -30,6 +30,52 @@
                         </div>
                     </div>
                     {{/each}}
+                    {{else}}
+                    {{#each listIsPremium}}
+                    <hr>
+                    <div class="col list-ct">
+                        <div class="item ispremium">
+                            <div class="img-top-view">
+                                <a href="/post/detailsCategory/{{NewsID}}"><img src="/public/assets/images/{{Avatar}}">
+                                </a>
+                            </div>
+                            <div class="content-item-top-view">
+                                <div class="tw-title"><a href="/post/detailsCategory/{{NewsID}}"> {{NewsTitle}} </a>
+                                </div>
+                                <div class="tw-chuyemuc"><a href="/post/listCategories/{{CatID}}">{{CatName}} </a></div>
+                                <div class="tw-category"><a href="/post/listTag/?tagName={{TagName}}"> #{{TagName}} </a>
+                                </div>
+                                <div class="tw-date"> {{DatePost}} </div>
+                                <div class="tw-abstract"> {{Abstract}} </div>
+
+                            </div>
+                            <div class="gianhan">
+                                <a class="btn btn-danger" href="/users/extension" role="button">Gia Han</a>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{#each listNotPremium}}
+                    <div class="col list-ct">
+                        <div class="item">
+                            <div class="img-top-view">
+                                <a href="/post/detailsCategory/{{NewsID}}"><img src="/public/assets/images/{{Avatar}}">
+                                </a>
+                            </div>
+                            <div class="content-item-top-view">
+                                <div class="tw-title"><a href="/post/detailsCategory/{{NewsID}}"> {{NewsTitle}} </a>
+                                </div>
+                                <div class="tw-chuyemuc"><a href="/post/listCategories/{{CatID}}">{{CatName}} </a></div>
+                                <div class="tw-category"><a href="/post/listTag/?tagName={{TagName}}"> #{{TagName}} </a>
+                                </div>
+                                <div class="tw-date"> {{DatePost}} </div>
+                                <div class="tw-abstract"> {{Abstract}} </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{/if}}
                     {{/if}}
                 </div>
                 <div class="panigation ">
