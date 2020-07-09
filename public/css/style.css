@@ -718,5 +718,10 @@ nguoi viet bai
   z-index: 100;
   text-align: center;
 }
-
+.extension {
+  height: 550px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* css gia han bai viet xxx*/

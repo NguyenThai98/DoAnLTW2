@@ -28,6 +28,18 @@ module.exports = {
 
         return db.patch(TBL_USERS, entity, condition);
     },
+    updatePw: function (pwh, idUser) {
+        let entity = {
+            Password: pwh
+        }
+        let condition = {
+            UserID: idUser
+        }
+        
+        console.log(entity, condition);
+
+        return db.patch(TBL_USERS, entity, condition);
+    },
     del: function (id) {
         const condition = { id }
         return db.del(TBL_USERS, condition);

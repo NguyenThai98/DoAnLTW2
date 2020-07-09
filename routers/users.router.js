@@ -5,6 +5,15 @@ const userModel = require('../models/user.model');
 const router = express.Router();
 const config = require('../config/config.json');
 const restrict = require('../middlewares/auth.mdw');
+const nodemailer = require("nodemailer");
+
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'nguyenthai492017@gmail.com',
+        pass: '771998Thai'
+    }
+});
 
 router.get('/login', (req, res) => {
     res.render('users/login');
@@ -44,13 +53,13 @@ router.get('/extension', (req, res) => {
     res.render('users/extension');
 })
 router.post('/extension', async (req, res) => {
-    const username = req.body.extension;
+    const username = req.body.username;
+    const password = req.body.password;
     let user = await userModel.singleByUserName(username);
-    if (user == null) {
-        res.render('users/login', {
-            error: "Tài Khoản chưa đăng ký!",
-        })
-    } else {
+    let pwh = user.Password;
+
+    let rs = bcrypt.compareSync(password, pwh);
+    if (user && rs) {
         let idUser = user.UserID;
         await userModel.updateTypeUser(0, idUser);
         delete user.Password;
@@ -59,14 +68,60 @@ router.post('/extension', async (req, res) => {
         res.render('users/login', {
             error: "Gia hạn thành công vui lòng đăng nhập lại !!!"
         });
+    } else {
+        res.render('users/login', {
+            error: "username password invalid!",
+        })
     }
 })
 // router.get('/categories', (req, res) => {
 //     res.render('users/categories');
 // })
 
-router.get('/resetpass', restrict, (req, res) => {
+router.get('/resetpass', (req, res) => {
     res.render('users/resetpass');
+})
+function getRandomArbitrary(min, max) {
+    return Math.random() * (max - min) + min;
+}
+router.post('/resetpass', async (req, res) => {
+
+    let username = req.body.UserName;
+    let Email = req.body.Email;
+    let user = await userModel.singleByUserName(username);
+
+    if (user && user.Email == Email) {
+        let text = Math.random().toString(36).substring(7);
+        let number = Math.floor(getRandomArbitrary(1000, 10000)) + "";
+        let pw = text + number;
+        let password_hash = bcrypt.hashSync(pw, config.authentication.saltRounds);
+        await userModel.updatePw(password_hash, user.UserID);
+        let content = `<ul>
+        <li>Reset Password</li>
+        <li> Mật khẩu của bạn là: ${pw}</li>
+    </ul>
+    `;
+        let mailOptions = {
+            from: 'nguyenthai4920178@gmail.com',
+            to: 'thongvo306@gmail.com',
+            subject: 'Reset password from NguyenThai',
+            text: 'Reset password',
+            html: content
+        };
+        transporter.sendMail(mailOptions, function (error, rs) {
+            if (error) {
+                return console.log(error);
+            } else {
+                res.render('users/login', {
+                    error: "vui lòng check mail!!",
+                });
+            }
+        })
+    } else {
+        res.render('users/login', {
+            error: "username or email invalid!",
+        });
+    }
 })
 router.get('/profile', (req, res) => {
     res.render('users/profile');
