@@ -4,18 +4,23 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <form>
+                    <form action="/post/phongvien" method="post" enctype="multipart/form-data">
                         <div class="form-group">
-                            <input type="email" class="form-control" id="tieudeBV" aria-describedby="emailHelp"
-                                name="tieudeBV" placeholder="Tiêu Đề Bài Viết . . .">
+                            <input type="text" class="form-control" id="tieudeBV" aria-describedby="emailHelp"
+                                name="NewsTitle" placeholder="Tiêu Đề Bài Viết . . .">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="tomtatBV" aria-describedby="emailHelp"
-                                name="tomtatBV" placeholder="Nội Dung Tóm Tắt . . .">
+                            <input type="text" class="form-control" id="tomtatBV" aria-describedby="emailHelp"
+                                name="Abstract" placeholder="Nội Dung Tóm Tắt . . .">
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" id="noidungBV" aria-describedby="emailHelp"
-                                name="noidungBV" placeholder="Nội Dung Chính . . .">
+                            <input type="text" class="form-control" id="noidungBV" aria-describedby="emailHelp"
+                                name="Content" placeholder="Nội Dung Chính . . .">
+                        </div>
+                        <div class="form-group">
+                            <label class="text-left" for="Avartar" style="width: 100%;">Hình Đại Diện Bài Viết</label>
+                            <input type="file" class="form-control" id="Avartar" aria-describedby="emailHelp"
+                                name="Avartar">
                         </div>
                         <div class="form-group">
                             <select class="form-control" id="exampleFormControlSelect1" name="loaiBaiViet">
@@ -25,7 +30,7 @@
                         </div>
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="tacgia" aria-describedby="emailHelp"
-                                name="tacgia">
+                                name="tacgia" value={{idUser}}>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="ngaydang" aria-describedby="emailHelp"
@@ -52,16 +57,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{#each list}}
                         <tr>
-                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                            <td>Chưa Được Duyệt</td>
+                            <td> {{NewsTitle}} </td>
+                            <td> {{Status}} </td>
                             <td>
-                                <a name="editBV" class="btn btn-warning editBV" href="/post/edit/3" role="button">
+                                {{#if isDel}}
+                                <a name="editBV" class="btn btn-warning editBV" href="/post/edit/{{NewsID}}" title="Edit" role="button">
                                     <i class="fa fa-pencil-square" aria-hidden="true"></i>
                                 </a>
+                                {{else}}
+                                <a name="editBV" class="btn btn-warning editBV" title="Not Edit"
+                                    href="javascript:void(0)" role="button">
+                                    <i class="fa fa-pencil-square" aria-hidden="true"></i>
+                                </a>
+                                {{/if}}
                             </td>
                         </tr>
-
+                        {{/each}}
                     </tbody>
                 </table>
             </div>

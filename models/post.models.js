@@ -32,5 +32,14 @@ module.exports = {
         return db.load(`SELECT *  FROM news n join tag t on n.TagID = t.TagID WHERE 
         MATCH(NewsTitle) 
         AGAINST('${value}')`)
-    }
+    },
+    NewPost: function (entity) {
+        return db.add(TBL_NEWS, entity);
+    },
+    DSBVPV: function (id) {
+        return db.load(`select * from ${TBL_NEWS} where Author = ${id}`);
+    },
+    selectEditPost: function (id) {
+        return db.load(`SELECT * FROM news where NewsID = ${id}`);
+    },
 };

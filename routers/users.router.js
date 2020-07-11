@@ -1,11 +1,13 @@
 const express = require('express');
 // const moment = require('moment');
+
 const bcrypt = require('bcryptjs');
 const userModel = require('../models/user.model');
 const router = express.Router();
 const config = require('../config/config.json');
 const restrict = require('../middlewares/auth.mdw');
 const nodemailer = require("nodemailer");
+
 
 let transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -136,7 +138,7 @@ router.get('/is-available', async function (req, res) {
 router.post('/logout', restrict, async (req, res) => {
     req.session.isAuthenticated = false;
     req.session.authUser = null;
-    res.redirect(req.headers.referer);
+    res.redirect('/');
 
 })
 router.post('/register', async function (req, res) {

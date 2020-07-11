@@ -3,37 +3,45 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <form>
+                {{#each post}}
+                <form method="post" action="/post/edit" enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="text" class="form-control" id="edittieudeBV" aria-describedby="emailHelp"
-                            name="edittieudeBV" placeholder="Tiêu Đề Bài Viết . . .">
+                            name="edittieudeBV" value="{{NewsTitle}}" placeholder="Tiêu Đề Bài Viết . . .">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="edittomtatBV" aria-describedby="emailHelp"
-                            name="edittomtatBV" placeholder="Nội Dung Tóm Tắt . . .">
+                            name="edittomtatBV" value="{{Abstract}}" placeholder="Nội Dung Tóm Tắt . . .">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="editnoidungBV" aria-describedby="emailHelp"
-                            name="editnoidungBV" placeholder="Nội Dung Chính . . .">
+                            name="editnoidungBV" value="{{Content}}" placeholder="Nội Dung Chính . . .">
                     </div>
                     <div class="form-group">
                         <select class="form-control" id="editexampleFormControlSelect1" name="editloaiBaiViet">
-                            <option>Không mất phí</option>
+                            {{#if IsPremium}}
+                                <option selected="selected">Mất phí</option>
+                                <option>Không mất phí</option>
+                            {{else}}
+                            <option selected="selected">Không mất phí</option>
                             <option>Mất phí</option>
+                            {{/if}}
+
                         </select>
                     </div>
                     <div class="form-group">
-                        <input type="hidden" class="form-control" id="edittacgia" aria-describedby="emailHelp"
-                            name="edittacgia">
+                        <input value="{{Author}}" type="hidden" class="form-control" id="edittacgia"
+                            aria-describedby="emailHelp" name="edittacgia">
                     </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="editngaydang" aria-describedby="emailHelp"
-                            name="editngaydang" placeholder="Ngày Đăng . . .">
+                            name="editngaydang" value="{{DatePost}}" placeholder="Ngày Đăng . . .">
                     </div>
                     <button type="submit" style="
     width: 100%;
 " class="btn btn-primary mt-4 mb-4">Submit</button>
                 </form>
+                {{/each}}
             </div>
         </div>
     </div>

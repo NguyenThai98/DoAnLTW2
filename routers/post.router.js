@@ -2,8 +2,53 @@ const express = require('express');
 const router = express.Router();
 const postModels = require('../models/post.models');
 const restrict = require('../middlewares/auth.mdw');
-router.get('/reporter', restrict, (req, res) => {
-    res.render('post/reporter');
+const multer = require('multer')
+const upload = multer({ dest: 'public/assets/images/' })
+
+
+router.get('/phongvien', restrict, async (req, res) => {
+    const list = await postModels.DSBVPV(res.locals.lcAuthUser.UserID);
+    for (let i = 0; i < list.length; i++) {
+        if (list[i].Status == 4) {
+            list[i].Status = "Chưa Được Duyệt";
+            list[i].isDel = true;
+        } else if (list[i].Status == 3) {
+            list[i].Status = "Bị Từ Chối";
+            list[i].isDel = true;
+        } else if (list[i].Status == 2) {
+            list[i].Status = "Đã Xuất Bản"
+        } else {
+            list[i].Status = "Đã Được Duyệt và Chờ Xuất Bản"
+        }
+    }
+
+
+    res.render('post/reporter', {
+        list,
+        idUser: res.locals.lcAuthUser.UserID
+    });
+
+})
+router.post('/phongvien', upload.single('Avartar'), async (req, res) => {
+    if (req.body.loaiBaiViet == "Mất phí") {
+        req.body.loaiBaiViet = 1;
+    } else {
+        req.body.loaiBaiViet = 0;
+    }
+    let entity = {
+        NewsTitle: req.body.NewsTitle,
+        Abstract: req.body.Abstract,
+        Content: req.body.Content,
+        IsPremium: req.body.loaiBaiViet,
+        Author: +req.body.tacgia,
+        DatePost: req.body.ngaydang,
+        Avatar: req.file.filename,
+        Status: 4
+    }
+    await postModels.NewPost(entity);
+
+    res.redirect('/post/phongvien');
+
 })
 router.get('/listCategories/:id', restrict, async (req, res) => {
     let id = req.params.id;
@@ -45,10 +90,6 @@ router.get('/listCategories/:id', restrict, async (req, res) => {
     }
     let typeUser = req.session.authUser.TypeOfUser;
 
-    console.log(req.session.authUser.UserName);
-
-    console.log("user----" + req.session.authUser.TypeOfUser);
-
 
     res.render('post/listCategoriesParent', {
         listIsPremium,
@@ -64,8 +105,22 @@ router.get('/listCategories/:id', restrict, async (req, res) => {
         can_go_next: page >= nTrang,
     });
 })
-router.get('/edit', restrict, (req, res) => {
-    res.render('post/editPost');
+router.get('/edit/:idNews', restrict, async (req, res) => {
+    let idPost = req.params.idNews;
+
+    let post = await postModels.selectEditPost(idPost);
+
+    for (let i = 0; i < post.length; i++) {
+        if (post[i].IsPremium == 1) {
+            post[i].IsPremium = true;
+        } else {
+            post[i].IsPremium = false;
+        }
+    }
+
+    res.render('post/editPost', {
+        post
+    });
 })
 router.get('/listChild/:id', restrict, async (req, res) => {
     let id = req.params.id;
