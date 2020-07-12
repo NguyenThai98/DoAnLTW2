@@ -35,6 +35,63 @@ router.post('/phongvien', upload.single('Avartar'), async (req, res) => {
     } else {
         req.body.loaiBaiViet = 0;
     }
+    let chuyemuc = req.body.chuyemuc;
+    if (chuyemuc == "Tư Liệu") {
+        req.body.chuyemuc = 1;
+    } else if (chuyemuc == "Phân Tích") {
+        req.body.chuyemuc = 2;
+    } else if (chuyemuc == "Doanh Nghiệp") {
+        req.body.chuyemuc = 3;
+    } else if (chuyemuc == "Bất Động Sản") {
+        req.body.chuyemuc = 4;
+    }
+    else if (chuyemuc == "Phim") {
+        req.body.chuyemuc = 5;
+    }
+    else if (chuyemuc == "Ca Nhạc") {
+        req.body.chuyemuc = 6;
+    }
+    else if (chuyemuc == "Bóng Đá") {
+        req.body.chuyemuc = 7;
+    }
+    else if (chuyemuc == "Tennis") {
+        req.body.chuyemuc = 8;
+    }
+    else if (chuyemuc == "Hồ Sơ Phá An") {
+        req.body.chuyemuc = 9;
+    }
+    else if (chuyemuc == "Tư Vấn Pháp Luật") {
+        req.body.chuyemuc = 10;
+    }
+    else if (chuyemuc == "Tuyển Sinh") {
+        req.body.chuyemuc = 11;
+    }
+    else if (chuyemuc == "Du Học") {
+        req.body.chuyemuc = 12;
+    }
+    else if (chuyemuc == "Các Bệnh") {
+        req.body.chuyemuc = 13;
+    }
+    else if (chuyemuc == "Tư Vấn Sức Khỏe") {
+        req.body.chuyemuc = 14;
+    }
+    else if (chuyemuc == "Tổ ấm") {
+        req.body.chuyemuc = 15;
+    }
+    else if (chuyemuc == "Bài Học Sống") {
+        req.body.chuyemuc = 16;
+    }
+    else if (chuyemuc == "Điểm Đến") {
+        req.body.chuyemuc = 17;
+    }
+    else if (chuyemuc == "Tư Vấn Du Lịch") {
+        req.body.chuyemuc = 18;
+    }
+    else if (chuyemuc == "Giao Thông") {
+        req.body.chuyemuc = 19;
+    } else if (chuyemuc == "MeKong") {
+        req.body.chuyemuc = 20;
+    }
     let entity = {
         NewsTitle: req.body.NewsTitle,
         Abstract: req.body.Abstract,
@@ -43,7 +100,8 @@ router.post('/phongvien', upload.single('Avartar'), async (req, res) => {
         Author: +req.body.tacgia,
         DatePost: req.body.ngaydang,
         Avatar: req.file.filename,
-        Status: 4
+        Status: 4,
+        CatChild_ID: req.body.chuyemuc
     }
     await postModels.NewPost(entity);
 
@@ -119,8 +177,50 @@ router.get('/edit/:idNews', restrict, async (req, res) => {
     }
 
     res.render('post/editPost', {
-        post
+        post: post[0]
     });
+})
+router.post('/edit', upload.single('Avartar'), async (req, res) => {
+    let post = await postModels.selectPost(req.body.NewsID);
+    let idpost = post[0].NewsID;
+    if (req.file) {
+        if (req.body.loaiBaiViet == "Mất phí") {
+            req.body.loaiBaiViet = 1;
+        } else {
+            req.body.loaiBaiViet = 0;
+        }
+        let entity = {
+            NewsTitle: req.body.NewsTitle,
+            Abstract: req.body.Abstract,
+            Content: req.body.Content,
+            IsPremium: req.body.loaiBaiViet,
+            Author: +req.body.tacgia,
+            DatePost: req.body.ngaydang,
+            Avatar: req.file.filename,
+            Status: 4
+        }
+        await postModels.updatePost(entity, idpost);
+        res.redirect('/post/phongvien');
+    } else {
+        if (req.body.loaiBaiViet == "Mất phí") {
+            req.body.loaiBaiViet = 1;
+        } else {
+            req.body.loaiBaiViet = 0;
+        }
+        let entity = {
+            NewsTitle: req.body.NewsTitle,
+            Abstract: req.body.Abstract,
+            Content: req.body.Content,
+            IsPremium: req.body.loaiBaiViet,
+            Author: +req.body.tacgia,
+            DatePost: req.body.ngaydang,
+            Avatar: post[0].Avatar,
+            Status: 4
+        }
+        await postModels.updatePost(entity, idpost);
+        res.redirect('/post/phongvien');
+    }
+
 })
 router.get('/listChild/:id', restrict, async (req, res) => {
     let id = req.params.id;

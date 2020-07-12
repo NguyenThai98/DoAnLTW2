@@ -42,4 +42,14 @@ module.exports = {
     selectEditPost: function (id) {
         return db.load(`SELECT * FROM news where NewsID = ${id}`);
     },
+    updatePost: function (entity, idUser) {
+        console.log(entity, idUser);
+        let condition = {
+            NewsID: idUser
+        }
+        return db.patch(TBL_NEWS, entity, condition);
+    },
+    selectPost: function (id) {
+        return db.load(`SELECT * FROM news where NewsID = ${id}`);
+    },
 };

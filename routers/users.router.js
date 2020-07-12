@@ -25,7 +25,8 @@ router.post('/login', async (req, res) => {
     let pw = req.body.PasswordLogin;
     let user = await userModel.singleByUserName(username);
     let pwh = user.Password;
-
+    console.log(user);
+    let typeUser = user.TypeOfUser;
     let rs = await bcrypt.compareSync(pw, pwh);
 
     if (user && rs) {
@@ -38,11 +39,29 @@ router.post('/login', async (req, res) => {
                 error: "Tài Khoản Bạn Cần Gia Hạn !",
             });
         } else {
-            delete user.Password;
-            req.session.isAuthenticated = true;
-            req.session.authUser = user;
-            const url = req.query.retUrl || '/';
-            res.redirect(url);
+            if (typeUser == 0 || typeUser == -1) {
+                delete user.Password;
+                req.session.isAuthenticated = true;
+                req.session.authUser = user;
+                res.redirect('/');
+            } else if (typeUser == 2) {
+                delete user.Password;
+                req.session.isAuthenticated = true;
+                req.session.authUser = user;
+                res.redirect('/post/phongvien');
+            } else if (typeUser == 3) {
+                delete user.Password;
+                req.session.isAuthenticated = true;
+                req.session.authUser = user;
+                res.redirect('/post/bientapvien');
+            }
+            else if (typeUser == 4) {
+                delete user.Password;
+                req.session.isAuthenticated = true;
+                req.session.authUser = user;
+                res.redirect('/admin');
+            }
+
         }
     } else {
         res.render('users/login', {

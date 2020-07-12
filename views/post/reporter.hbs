@@ -29,6 +29,31 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label class="text-left" for="chuyemuc" style="width: 100%;">Chuyên Mục</label>
+                            <select class="form-control" id="exampleFormControlSelect1" name="chuyemuc">
+                                <option>Tư Liệu</option>
+                                <option>Phân Tích</option>
+                                <option>Doanh Nghiệp</option>
+                                <option>Bất Động Sản</option>
+                                <option>Phim</option>
+                                <option>Ca Nhạc</option>
+                                <option>Bóng Đá</option>
+                                <option>Tennis</option>
+                                <option>Hồ Sơ Phá An</option>
+                                <option>Tư Vấn Pháp Luật</option>
+                                <option>Tuyển Sinh</option>
+                                <option>Du Học</option>
+                                <option>Các Bệnh</option>
+                                <option>Tư Vấn Sức Khỏe</option>
+                                <option>Tổ ấm</option>
+                                <option>Bài Học Sống</option>
+                                <option>Điểm Đến</option>
+                                <option>Tư Vấn Du Lịch</option>
+                                <option>Giao Thông</option>
+                                <option>MeKong</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <input type="hidden" class="form-control" id="tacgia" aria-describedby="emailHelp"
                                 name="tacgia" value={{idUser}}>
                         </div>
@@ -63,7 +88,8 @@
                             <td> {{Status}} </td>
                             <td>
                                 {{#if isDel}}
-                                <a name="editBV" class="btn btn-warning editBV" href="/post/edit/{{NewsID}}" title="Edit" role="button">
+                                <a name="editBV" class="btn btn-warning editBV" href="/post/edit/{{NewsID}}"
+                                    title="Edit" role="button">
                                     <i class="fa fa-pencil-square" aria-hidden="true"></i>
                                 </a>
                                 {{else}}
