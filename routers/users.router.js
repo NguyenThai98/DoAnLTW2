@@ -25,7 +25,7 @@ router.post('/login', async (req, res) => {
     let pw = req.body.PasswordLogin;
     let user = await userModel.singleByUserName(username);
     let pwh = user.Password;
-    console.log(user);
+
     let typeUser = user.TypeOfUser;
     let rs = await bcrypt.compareSync(pw, pwh);
 
@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
                 delete user.Password;
                 req.session.isAuthenticated = true;
                 req.session.authUser = user;
-                res.redirect('/post/bientapvien');
+                res.redirect('/editor');
             }
             else if (typeUser == 4) {
                 delete user.Password;
@@ -82,7 +82,11 @@ router.post('/extension', async (req, res) => {
     let rs = bcrypt.compareSync(password, pwh);
     if (user && rs) {
         let idUser = user.UserID;
-        await userModel.updateTypeUser(0, idUser);
+        var now = new Date();
+        var dob = new Date();
+        dob.setDate(now.getDate());
+        dob = dob.getTime();
+        await userModel.updateTypeUser(dob, idUser);
         delete user.Password;
         req.session.isAuthenticated = true;
         req.session.authUser = user;
@@ -166,7 +170,6 @@ router.post('/register', async function (req, res) {
     dob.setDate(now.getDate() - 3);
 
     dob = dob.getTime();
-    console.log(dob);
 
     const password_hash = bcrypt.hashSync(req.body.Password, config.authentication.saltRounds);
     const entity = {

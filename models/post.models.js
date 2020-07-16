@@ -43,7 +43,7 @@ module.exports = {
         return db.load(`SELECT * FROM news where NewsID = ${id}`);
     },
     updatePost: function (entity, idUser) {
-        console.log(entity, idUser);
+ 
         let condition = {
             NewsID: idUser
         }

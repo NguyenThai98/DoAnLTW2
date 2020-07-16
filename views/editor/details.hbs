@@ -1,0 +1,31 @@
+<div class="container">
+    {{#each detailsPost}}
+    <a class="btn btn-success" href="/editor" role="button">Quản Lý Danh Sách Bài Viêt</a>
+    <h3 class="mt-4">| {{CatName}}</h3>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="details-categories">
+                <div class="details-img">
+                    <a href="#"><img src="/public/assets/images/{{Avatar}}"> </a>
+                </div>
+                <div class="details-content">
+                    <div class="ct-title font-weight-bold">
+                        {{NewsTitle}}
+                    </div>
+                    <div class="ct-date">
+                        {{DatePost}}
+                    </div>
+                    <div class="ct-content ">
+                        {{Content}}
+                    </div>
+                    <div class="ct-tag font-weight-bold">
+                        #{{TagName}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{/each}}
+    </div>
+</div>

@@ -35,9 +35,16 @@
                             {{/if}}
                         </select>
                     </div>
+
                     <div class="form-group">
-                        <label class="text-left" for="chuyemuc" style="width: 100%;">Chuyên Mục</label>
+                        <label class="text-left" for="chuyemuc">Chuyên Mục: </label>
+                        <input type="text" class="form-control" id="editnoidungBV" style="
+    display: inline-block;
+    width: 250px;
+    margin-bottom: 20px;
+" name="showchuyenmuc" value="{{this.post.CatChild_ID}}" readonly="readonly">
                         <select class="form-control" id="exampleFormControlSelect1" name="chuyemuc">
+                            <option>Thay Đổi Chuyên Mục</option>
                             <option>Tư Liệu</option>
                             <option>Phân Tích</option>
                             <option>Doanh Nghiệp</option>

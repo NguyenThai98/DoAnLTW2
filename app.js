@@ -14,6 +14,7 @@ require('./middlewares/locals.mdw')(app);
 
 app.use('/users', require('./routers/users.router'));
 app.use('/post', require('./routers/post.router'));
+app.use('/editor', require('./routers/bientapvien.router.js'));
 
 app.use('/public', express.static('public'));
 

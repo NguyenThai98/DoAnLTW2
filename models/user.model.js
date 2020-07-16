@@ -17,14 +17,14 @@ module.exports = {
     add: function (entity) {
         return db.add(TBL_USERS, entity);
     },
-    updateTypeUser: function (typeUser, idUser) {
+    updateTypeUser: function (timeRegister, idUser) {
         let entity = {
-            TypeOfUser: typeUser
+            TimeRegister: timeRegister
         }
         let condition = {
             UserID: idUser
         }
-        console.log(entity, condition);
+   
 
         return db.patch(TBL_USERS, entity, condition);
     },
@@ -36,7 +36,7 @@ module.exports = {
             UserID: idUser
         }
         
-        console.log(entity, condition);
+ 
 
         return db.patch(TBL_USERS, entity, condition);
     },
