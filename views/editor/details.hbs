@@ -17,15 +17,24 @@
                         {{DatePost}}
                     </div>
                     <div class="ct-content ">
-                        {{Content}}
+                        {{{Content}}}
                     </div>
                     <div class="ct-tag font-weight-bold">
                         #{{TagName}}
                     </div>
                 </div>
             </div>
+            <a class="btn btn-success w-100 mb-4 mt-4" href="javascript: $('#frmconfirm').submit()" role="button">Duyệt
+                Bài</a>
+            <a class="btn btn-warning w-100 mb-4" href="javascript: $('#frmcancel').submit()" role="button">Từ Chối</a>
         </div>
-
-        {{/each}}
     </div>
+    <form id="frmconfirm" action="/editor/confirm" method="POST">
+        <input type="hidden" name="NewsID" value={{NewsID}}>
+    </form>
+    <form id="frmcancel" action="/editor/cancel" method="POST">
+        <input type="hidden" name="NewsID" value={{NewsID}}>
+    </form>
+    {{/each}}
+
 </div>

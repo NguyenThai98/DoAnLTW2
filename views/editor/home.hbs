@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid bientapvien">
     <div class="row mt-4 mb-4">
         <div class="col-sm-12">
             <table class="table text-center">
@@ -6,9 +6,6 @@
                     <tr>
                         <th>Tiêu Đề</th>
                         <th>Tình Trạng</th>
-                        <th>
-                            Xử Lý
-                        </th>
                         <th>Xem Chi Tiết</th>
                     </tr>
                 </thead>
@@ -17,10 +14,7 @@
                     <tr>
                         <td> {{NewsTitle}} </td>
                         <td> {{Status}} </td>
-                        <td>
-                            <a class="btn btn-success" href="/editor/confirm" role="button">Duyệt Bài</a>
-                            <a class="btn btn-warning" href="/editor/cancel" role="button">Từ Chối</a>
-                        </td>
+
                         <td><a class="btn btn-danger" href="/editor/details/{{NewsID}}" role="button">Xem Chi Tiết</a>
                         </td>
                     </tr>

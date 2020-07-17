@@ -12,13 +12,13 @@ module.exports = {
         return db.load(`select * from ${TBL_USERS} where id = ${id}`);
     },
     chonBVNoiBat: function () {
-        return db.load(`SELECT * FROM ${TBL_CATEGORY_NEWS} n join ${TBL_CATEGORY_TAG} t on n.NewsID = T.NewsID join ${TBL_CATEGORY_CHILD} cc on n.CatChild_ID = cc.CatChild_ID join category c on c.CatID = cc.CatID  order by likee DESC limit 4`);
+        return db.load(`SELECT * FROM ${TBL_CATEGORY_NEWS} n join ${TBL_CATEGORY_TAG} t on n.NewsID = T.NewsID join ${TBL_CATEGORY_CHILD} cc on n.CatChild_ID = cc.CatChild_ID join category c on c.CatID = cc.CatID where n.Status = 2  order by likee   DESC limit 4`);
     },
     chonBV10NoiBat: function () {
-        return db.load(`SELECT * FROM category c join category_child cc on c.CatID = cc.CatID join news n on cc.CatChild_ID = n.CatChild_ID join tag t on t.NewsID = n.NewsID order by View DESC limit 10`);
+        return db.load(`SELECT * FROM category c join category_child cc on c.CatID = cc.CatID join news n on cc.CatChild_ID = n.CatChild_ID join tag t on t.NewsID = n.NewsID where n.Status = 2 order by View   DESC limit 10`);
     },
     BVmoiNhat: function () {
-        return db.load(`SELECT * FROM ${TBL_CATEGORY_NEWS} n JOIN ${TBL_CATEGORY_TAG} t on n.NewsID = t.NewsID ORDER BY DatePost DESC LIMIT 10`);
+        return db.load(`SELECT * FROM ${TBL_CATEGORY_NEWS} n JOIN ${TBL_CATEGORY_TAG} t on n.NewsID = t.NewsID where n.Status = 2 ORDER BY DatePost   DESC LIMIT 10`);
     },
     muoichuyenmuc: function(){
         return db.load(`SELECT DISTINCT(TagName) from ${TBL_CATEGORY_TAG} LIMIT 10`)

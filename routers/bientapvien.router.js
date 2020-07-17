@@ -21,14 +21,24 @@ router.get('/', restrict, async (req, res) => {
         list,
     })
 })
-router.get('/details/:id', async (req, res) => {
+router.get('/details/:id', restrict, async (req, res) => {
     let id = req.params.id;
 
 
     let detailsPost = await editoModels.detailsPost(id);
-    console.log(detailsPost);
+
     res.render('editor/details', {
         detailsPost
     });
+})
+router.post('/confirm', async (req, res) => {
+    let idPost = req.body.NewsID;
+    await editoModels.updatePost(2, idPost);
+    res.redirect('/editor');
+})
+router.post('/cancel', async (req, res) => {
+    let idPost = req.body.NewsID;
+    await editoModels.updatePost(3, idPost);
+    res.redirect('/editor');
 })
 module.exports = router;
