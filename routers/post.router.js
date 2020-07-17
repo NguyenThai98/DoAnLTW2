@@ -8,6 +8,7 @@ const upload = multer({ dest: 'public/assets/images/' })
 
 router.get('/phongvien', restrict, async (req, res) => {
     const list = await postModels.DSBVPV(res.locals.lcAuthUser.UserID);
+    let listCM = await postModels.ListCM();
     for (let i = 0; i < list.length; i++) {
         if (list[i].Status == 4) {
             list[i].Status = "Chưa Được Duyệt";
@@ -25,6 +26,7 @@ router.get('/phongvien', restrict, async (req, res) => {
 
     res.render('post/reporter', {
         list,
+        listCM,
         idUser: res.locals.lcAuthUser.UserID
     });
 
@@ -459,5 +461,9 @@ router.post('/search', async (req, res) => {
         empty: row.length == 0,
     })
 })
-//post/category
+// router.get('isSelectCM', async (req, res) => {
+//     let cm = req.query.select;
+//     console.log(cm);
+//     // const select = await postModels.selectCM(cm)
+// })
 module.exports = router;

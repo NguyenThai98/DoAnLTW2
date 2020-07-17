@@ -37,7 +37,7 @@ module.exports = {
         return db.add(TBL_NEWS, entity);
     },
     DSBVPV: function (id) {
-        return db.load(`select * from ${TBL_NEWS} where Author = ${id}`);
+        return db.load(`select * from ${TBL_NEWS} where Status = 4 or Status = 3 and   Author = ${id}`);
     },
     selectEditPost: function (id) {
         return db.load(`SELECT * FROM news where NewsID = ${id}`);
@@ -52,4 +52,7 @@ module.exports = {
     selectPost: function (id) {
         return db.load(`SELECT * FROM news where Status = 2 AND NewsID = ${id}`);
     },
+    ListCM: function () {
+        return db.load(`SELECT DISTINCT TagName FROM tag`);
+    }
 };

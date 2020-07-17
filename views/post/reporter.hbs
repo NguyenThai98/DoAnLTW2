@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-group">
                             <label class="text-left" for="chuyemuc" style="width: 100%;">Chuyên Mục</label>
-                            <select class="form-control" id="exampleFormControlSelect1" name="chuyemuc">
+                            <select class="form-control" id="chuyemuc" name="chuyemuc">
                                 <option>Tư Liệu</option>
                                 <option>Phân Tích</option>
                                 <option>Doanh Nghiệp</option>
@@ -51,6 +51,14 @@
                                 <option>Tư Vấn Du Lịch</option>
                                 <option>Giao Thông</option>
                                 <option>MeKong</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="text-left" for="TagName" style="width: 100%;">TagName</label>
+                            <select class="form-control" id="TagName" name="TagName">
+                                {{#each listCM}}
+                                <option value={{TagName}}> {{TagName}} </option>
+                                {{/each}}
                             </select>
                         </div>
                         <div class="form-group">
@@ -145,6 +153,7 @@
         timepicker: false,
         mask: true
     })
+
 </script>
 
 {{/section}}
