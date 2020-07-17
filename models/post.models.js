@@ -1,5 +1,6 @@
 const db = require('../utils/db');
 const TBL_NEWS = 'news';
+const TBL_TAG = 'tag';
 
 module.exports = {
     all: function () {
@@ -37,7 +38,7 @@ module.exports = {
         return db.add(TBL_NEWS, entity);
     },
     DSBVPV: function (id) {
-        return db.load(`select * from ${TBL_NEWS} where Status = 4 or Status = 3 and   Author = ${id}`);
+        return db.load(`select * from news where Status = 4  and  Author = 20 or Status = 3  and  Author = ${id}`);
     },
     selectEditPost: function (id) {
         return db.load(`SELECT * FROM news where NewsID = ${id}`);
@@ -50,9 +51,20 @@ module.exports = {
         return db.patch(TBL_NEWS, entity, condition);
     },
     selectPost: function (id) {
-        return db.load(`SELECT * FROM news where Status = 2 AND NewsID = ${id}`);
+        return db.load(`SELECT * FROM news where  NewsID = ${id}`);
     },
     ListCM: function () {
         return db.load(`SELECT DISTINCT TagName FROM tag`);
-    }
+    },
+    countTag: async function () {
+        let Total = await db.load(`SELECT Max(TagID) as ToTal from tag`);
+        return Total[0];
+    },
+    countPost: async function () {
+        let Total = await db.load(`SELECT Max(NewsID) as ToTal FROM news;`);
+        return Total[0];
+    },
+    addTag: function (entity) {
+        return db.add(TBL_TAG, entity);
+    },
 };

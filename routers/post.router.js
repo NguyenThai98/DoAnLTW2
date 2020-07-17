@@ -32,11 +32,15 @@ router.get('/phongvien', restrict, async (req, res) => {
 
 })
 router.post('/phongvien', upload.single('Avartar'), async (req, res) => {
+    let countTagID = await postModels.countTag();
+
+
     if (req.body.loaiBaiViet == "Mất phí") {
         req.body.loaiBaiViet = 1;
     } else {
         req.body.loaiBaiViet = 0;
     }
+
     let chuyemuc = req.body.chuyemuc;
     if (chuyemuc == "Tư Liệu") {
         req.body.chuyemuc = 1;
@@ -98,6 +102,7 @@ router.post('/phongvien', upload.single('Avartar'), async (req, res) => {
     else if (chuyemuc == "MeKong") {
         req.body.chuyemuc = 20;
     }
+    let countT = countTagID.ToTal++;
     let entity = {
         NewsTitle: req.body.NewsTitle,
         Abstract: req.body.Abstract,
@@ -107,10 +112,18 @@ router.post('/phongvien', upload.single('Avartar'), async (req, res) => {
         DatePost: req.body.ngaydang,
         Avatar: req.file.filename,
         Status: 4,
-        CatChild_ID: req.body.chuyemuc
+        CatChild_ID: req.body.chuyemuc,
+        TagID: countT,
     }
     await postModels.NewPost(entity);
 
+    let countPost = await postModels.countPost();
+
+    let entityTag = {
+        TagName: req.body.TagName,
+        NewsID: countPost.ToTal,
+    }
+    await postModels.addTag(entityTag);
     res.redirect('/post/phongvien');
 
 })
@@ -247,9 +260,10 @@ router.get('/edit/:idNews', restrict, async (req, res) => {
     });
 })
 router.post('/edit', upload.single('Avartar'), async (req, res) => {
+
     let post = await postModels.selectPost(req.body.NewsID);
-    let idpost = post[0].NewsID;
-    let chuyemucPost = post[0].CatChild_ID;
+    let idpost = req.body.NewsID;
+    let chuyemucPost = req.body.showchuyenmuc;
     let chuyemuc = req.body.chuyemuc;
 
     if (chuyemuc == "Tư Liệu") {
@@ -314,8 +328,6 @@ router.post('/edit', upload.single('Avartar'), async (req, res) => {
     else if (chuyemuc == "MeKong") {
         req.body.chuyemuc = 20;
     }
-
-
     if (req.file) {
         if (req.body.loaiBaiViet == "Mất phí") {
             req.body.loaiBaiViet = 1;
@@ -334,6 +346,7 @@ router.post('/edit', upload.single('Avartar'), async (req, res) => {
                 Status: 4,
                 CatChild_ID: req.body.chuyemuc
             }
+
             await postModels.updatePost(entity, idpost);
             res.redirect('/post/phongvien');
         } else {
@@ -347,6 +360,7 @@ router.post('/edit', upload.single('Avartar'), async (req, res) => {
                 Avatar: req.file.filename,
                 Status: 4,
             }
+
             await postModels.updatePost(entity, idpost);
             res.redirect('/post/phongvien');
         }
