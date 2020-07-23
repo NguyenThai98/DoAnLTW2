@@ -186,6 +186,7 @@ router.get('/edit/:idNews', restrict, async (req, res) => {
     let idPost = req.params.idNews;
 
     let post = await postModels.selectEditPost(idPost);
+
     for (let i = 0; i < post.length; i++) {
         if (post[i].IsPremium == 1) {
             post[i].IsPremium = true;
@@ -256,7 +257,9 @@ router.get('/edit/:idNews', restrict, async (req, res) => {
     }
 
     res.render('post/editPost', {
-        post: post[0]
+        post: post[0],
+        note: post[0].Note != null
+
     });
 })
 router.post('/edit', upload.single('Avartar'), async (req, res) => {
@@ -344,6 +347,7 @@ router.post('/edit', upload.single('Avartar'), async (req, res) => {
                 DatePost: req.body.ngaydang,
                 Avatar: req.file.filename,
                 Status: 4,
+                Note: null,
                 CatChild_ID: req.body.chuyemuc
             }
 
@@ -359,6 +363,7 @@ router.post('/edit', upload.single('Avartar'), async (req, res) => {
                 DatePost: req.body.ngaydang,
                 Avatar: req.file.filename,
                 Status: 4,
+                Note: null,
             }
 
             await postModels.updatePost(entity, idpost);
@@ -381,6 +386,7 @@ router.post('/edit', upload.single('Avartar'), async (req, res) => {
                 DatePost: req.body.ngaydang,
                 Avatar: post[0].Avatar,
                 Status: 4,
+                Note: null,
                 CatChild_ID: req.body.chuyemuc
             }
             await postModels.updatePost(entity, idpost);
@@ -395,6 +401,7 @@ router.post('/edit', upload.single('Avartar'), async (req, res) => {
                 DatePost: req.body.ngaydang,
                 Avatar: post[0].Avatar,
                 Status: 4,
+                Note: null,
             }
             await postModels.updatePost(entity, idpost);
             res.redirect('/post/phongvien');

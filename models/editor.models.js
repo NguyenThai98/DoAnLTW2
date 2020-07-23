@@ -6,9 +6,10 @@ module.exports = {
     },
     detailsPost: function (id) {
         return db.load(`SELECT n.Avatar, n.NewsID,n.NewsTitle,t.TagName,n.Content,c.CatName,n.DatePost FROM news n JOIN category_child cc on n.CatChild_ID = cc.CatChild_ID JOIN category c on c.CatID = cc.CatID join tag t on t.TagID = n.TagID  WHERE n.NewsID = ${id}`);
-    }, updatePost: function (status, idUser) {
+    }, updatePost: function (obj, idUser) {
         let entity = {
-            Status: status
+            Status: obj.Status,
+            Note: obj.Note
         }
         let condition = {
             NewsID: idUser

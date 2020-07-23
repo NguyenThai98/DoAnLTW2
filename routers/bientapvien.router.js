@@ -5,7 +5,7 @@ const restrict = require('../middlewares/auth.mdw');
 router.get('/', restrict, async (req, res) => {
     let editorPer = res.locals.lcAuthUser;
     let list = await editoModels.selectPostPV(editorPer.UserID);
-   
+
     for (let i = 0; i < list.length; i++) {
         if (list[i].Status == 4) {
             list[i].Status = "Chưa Được Duyệt";
@@ -25,7 +25,7 @@ router.get('/', restrict, async (req, res) => {
 router.get('/details/:id', restrict, async (req, res) => {
     let id = req.params.id;
     let detailsPost = await editoModels.detailsPost(id);
-    console.log(detailsPost);
+
     res.render('editor/details', {
         detailsPost
     });
@@ -37,7 +37,12 @@ router.post('/confirm', async (req, res) => {
 })
 router.post('/cancel', async (req, res) => {
     let idPost = req.body.NewsID;
-    await editoModels.updatePost(3, idPost);
+    let msgCancel = req.body.cancelPost;
+    let entity = {
+        Status: 3,
+        Note: msgCancel
+    }
+    await editoModels.updatePost(entity, idPost);
     res.redirect('/editor');
 })
 module.exports = router;

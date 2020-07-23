@@ -6,7 +6,8 @@
     <h3 class="mt-4 mb-4 text-center">| {{CatName}} |</h3>
 
     <div class="row">
-        <div class="col-12">
+        <div class="col-3"></div>
+        <div class="col-6">
             <div class="details-categories">
                 <div class="details-img">
                     <a href="#"><img src="/public/assets/images/{{Avatar}}"> </a>
@@ -28,15 +29,47 @@
             </div>
             <a class="btn btn-success w-100 mb-4 mt-4" href="javascript: $('#frmconfirm').submit()" role="button">Duyệt
                 Bài</a>
-            <a class="btn btn-danger w-100 mb-4" href="javascript: $('#frmcancel').submit()" role="button">Từ Chối</a>
+            <a class="btn btn-danger cancel-post w-100 mb-4" href="#" role="button">Từ Chối</a>
         </div>
+        <div class="col-3"></div>
+    </div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6 msg-cancel">
+            <form action="/editor/cancel" method="POST">
+                <div class="form-group">
+                    <label for="cancel-post" class="text-center d-block"><b>Lý Do Từ Chối</b></label>
+                    <input type="hidden" name="NewsID" value={{NewsID}}>
+                    <textarea class="form-control" id="cancel-post" name="cancelPost" rows="3"></textarea>
+                    <button type="submit" class="btn btn-cancel-2 w-100 mt-4 mb-4 btn-warning">Từ Chối</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-3"></div>
     </div>
     <form id="frmconfirm" action="/editor/confirm" method="POST">
         <input type="hidden" name="NewsID" value={{NewsID}}>
     </form>
-    <form id="frmcancel" action="/editor/cancel" method="POST">
-        <input type="hidden" name="NewsID" value={{NewsID}}>
-    </form>
+
     {{/each}}
 
 </div>
+
+{{#section 'js'}}
+<script>
+    $(document).ready(function () {
+        let cancel = $('.cancel-post');
+        cancel.on('click', function (e) {
+            e.preventDefault();
+            $('.msg-cancel').slideToggle("slow");
+            cancel.hide();
+        })
+            ('.btn-cancel-2').on('click', function () {
+                cancel.show();
+            })
+    })
+
+
+</script>
+
+{{/section}}

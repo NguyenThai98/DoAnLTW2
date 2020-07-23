@@ -27,6 +27,11 @@ a.pages.active {
   background: black;
 }
 
+.msg-cancel {
+  display: none;
+}
+
+
 span {
   font-family: var(--Abel);
 }
@@ -727,7 +732,7 @@ nguoi viet bai
 }
 
 
-.bientapvien{
+.bientapvien {
   min-height: 500px;
 }
 

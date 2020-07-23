@@ -3,9 +3,13 @@
     <div class="container">
         <div class="row">
             <div class="col">
+                {{#if note}}
                 <label class="text-left" for="Avartar" style="width: 100%;">Bài viết chưa được duyệt !</label>
-                <input type="text" class="form-control mb-4" readonly="readonly" value="{{error}}">
+                <input type="text" class="form-control mb-4 text-center font-weight-bold" readonly="readonly"
+                    value="{{this.post.Note}}">
+                {{/if}}
                 {{#if post}}
+
                 <form action="/post/edit" method="post" enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="text" class="form-control" id="edittieudeBV" aria-describedby="emailHelp"
