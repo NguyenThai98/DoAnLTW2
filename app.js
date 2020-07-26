@@ -1,10 +1,13 @@
 const express = require('express');
 const app = express();
 const PORT = 3000;
+var bodyParser = require('body-parser');
+
 
 app.use(express.urlencoded({
     extended: true
 }));
+app.use(bodyParser.json());
 require('./middlewares/session.mdw')(app);
 require('./middlewares/view.mdw')(app);
 require('./middlewares/locals.mdw')(app);

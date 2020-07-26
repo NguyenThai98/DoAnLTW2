@@ -67,4 +67,17 @@ module.exports = {
     addTag: function (entity) {
         return db.add(TBL_TAG, entity);
     },
+    selectComent: function (id) {
+        return db.load(`select c.Content, c.DateTime,u.UserName from comment c JOIN user u on c.UserID = u.UserID WHERE NewsID = ${id} ORDER BY CmtID DESC `);
+    },
+    countComment: async function (id) {
+        const row = await db.load(`select COUNT(*) as totalPage from comment WHERE NewsID = ${id}`);
+        return row[0].totalPage;
+    },
+    addCM: function (entity) {
+        return db.add('comment', entity);
+    },
+    selectComentNew: function (id) {
+        return db.load(`select c.Content, c.DateTime,u.UserName from comment c JOIN user u on c.UserID = u.UserID WHERE NewsID = ${id} ORDER BY CmtID DESC limit 1 `);
+    },
 };
