@@ -108,6 +108,10 @@
     })
 
     $.get(`/post/is-dataComment/?idPost=${sPageURL}`, function (data, status) {
+<<<<<<< HEAD
+=======
+        console.log('ok');
+>>>>>>> cfbb8c5b9b4e001d028bbf5aa06c5ee0f0807b1f
         $('#panigation1').pagination({
             dataSource: data.concat(dataTotal),
             pageSize: 3,
