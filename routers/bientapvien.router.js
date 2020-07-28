@@ -31,8 +31,10 @@ router.get('/details/:id', restrict, async (req, res) => {
     });
 })
 router.post('/confirm', async (req, res) => {
+
     let idPost = req.body.NewsID;
-    await editoModels.updatePost(2, idPost);
+
+    await editoModels.updatePostD(2, idPost);
     res.redirect('/editor');
 })
 router.post('/cancel', async (req, res) => {

@@ -57,7 +57,7 @@
                             <label class="text-left" for="TagName" style="width: 100%;">TagName</label>
                             <select class="form-control" id="TagName" name="TagName">
                                 {{#each listCM}}
-                                <option value={{TagName}}> {{TagName}} </option>
+                                <option value="{{this.TagName}}"> {{this.TagName}} </option>
                                 {{/each}}
                             </select>
                         </div>

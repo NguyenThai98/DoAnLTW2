@@ -8,7 +8,9 @@ const upload = multer({ dest: 'public/assets/images/' })
 
 router.get('/phongvien', restrict, async (req, res) => {
     const list = await postModels.DSBVPV(res.locals.lcAuthUser.UserID);
+
     let listCM = await postModels.ListCM();
+
     for (let i = 0; i < list.length; i++) {
         if (list[i].Status == 4) {
             list[i].Status = "Chưa Được Duyệt";
@@ -22,8 +24,6 @@ router.get('/phongvien', restrict, async (req, res) => {
             list[i].Status = "Đã Được Duyệt và Chờ Xuất Bản"
         }
     }
-
-
     res.render('post/reporter', {
         list,
         listCM,
@@ -32,6 +32,8 @@ router.get('/phongvien', restrict, async (req, res) => {
 
 })
 router.post('/phongvien', upload.single('Avartar'), async (req, res) => {
+
+
     let countTagID = await postModels.countTag();
 
 
@@ -42,6 +44,7 @@ router.post('/phongvien', upload.single('Avartar'), async (req, res) => {
     }
 
     let chuyemuc = req.body.chuyemuc;
+
     if (chuyemuc == "Tư Liệu") {
         req.body.chuyemuc = 1;
     }
@@ -124,6 +127,7 @@ router.post('/phongvien', upload.single('Avartar'), async (req, res) => {
         NewsID: countPost.ToTal,
     }
     await postModels.addTag(entityTag);
+
     res.redirect('/post/phongvien');
 
 })
@@ -464,13 +468,24 @@ router.get('/listTag', restrict, async (req, res) => {
         TagName,
     });
 })
+
+router.get('/is-dataComment', async (req, res) => {
+    const comment = await postModels.selectComent(req.query.idPost);
+    res.json(Array.from(comment));
+})
+
 router.get('/detailsCategory/:id', restrict, async (req, res) => {
-    const id = +req.params.id;
+
+    let id = +req.params.id;
     const row = await postModels.chitietsp(id);
+
     const row2 = await postModels.bvlienquan();
+
     res.render('post/categories', {
         sanpham: row,
-        bvlienquan: row2
+        bvlienquan: row2,
+        idPost: row[0].NewsID,
+
     })
 
 })
@@ -482,9 +497,35 @@ router.post('/search', async (req, res) => {
         empty: row.length == 0,
     })
 })
-// router.get('isSelectCM', async (req, res) => {
-//     let cm = req.query.select;
-//     console.log(cm);
-//     // const select = await postModels.selectCM(cm)
-// })
+
+router.post('/uploadCm', async (req, res) => {
+
+
+    var d = new Date();
+    var n = d.toString();
+    n = n.split(' ');
+    let time = "";
+    for (let i = 0; i < n.length; i++) {
+        if (i == 0) {
+            continue;
+        }
+        time = time + n[i] + "-";
+        if (i >= 4) {
+            break;
+        }
+    }
+    time = time.slice(0, time.length - 1);
+    let entity = {
+        Content: req.body.ndBinhLuan,
+        UserID: +res.locals.lcAuthUser.UserID,
+        NewsID: +req.body.idPost,
+        DateTime: time
+    }
+    await postModels.addCM(entity);
+    let newCm = await postModels.selectComentNew(+req.body.idPost);
+    return res.send(newCm);
+    // res.redirect(req.headers.referer);
+})
+
+
 module.exports = router;

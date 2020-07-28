@@ -16,7 +16,7 @@
                             {{DatePost}}
                         </div>
                         <div class="ct-content ">
-                            {{Content}}
+                            {{{Content}}}
                         </div>
                         <div class="ct-tag font-weight-bold">
                             #{{TagName}}
@@ -28,30 +28,34 @@
         {{/each}}
 
         <h3 class="mt-4">| Đánh Giá</h3>
+
         <div class="row">
-            <div class="col">
-                <div class="ctiet-danhgia">
-                    <div class="nd-danhgia">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem esse delectus
-                        fuga quo magni cupiditate autem velit tempore sequi quam dolor ipsam error, accusamus
-                        dignissimos consequatur provident vero tenetur distinctio!</div>
-                    <div class="date-dg"><i>20/10/2002</i></div>
-                    <div class="name-docgia"><b>Nguyễn Thái</b></div>
-                </div>
-                <form action="">
+            <div class="col ">
+                <form action="/post/uploadCm" id="frmCM" method="post">
                     <div class="form-group">
-                        <label for=""></label>
-                        <input type="text" class="form-control" name="" id="" aria-describedby="helpId"
-                            placeholder="Nhập...">
-                        <small id="helpId" class="form-text text-muted">Nội Dung Đánh Giá</small>
-                        <button type="submit" class="btn btn-success">
+                        <input type="text" id="ipCM" class="form-control mt-4 mb-4" name="ndBinhLuan"
+                            placeholder="Nhập Bình Luận...">
+                        {{#if idPost}}
+                        <input type="hidden" id="idPost" name="idPost" value="{{idPost}}">
+
+                        {{/if}}
+                        {{#if UserName}}
+                        <input type="hidden" id="UserName" name="UserName" value="{{UserName}}">
+                        {{/if}}
+                        <button type="submit" class="btn submit btn-success w-100">
                             Gửi
                         </button>
                     </div>
                 </form>
+                <div class="comment">
+                </div>
+            </div>
+            <div class="col-12">
+                <div id="panigation1">
+                </div>
             </div>
         </div>
         <h3 class="mb-4">| Chủ Đề Tương Tự</h3>
-
         <div class="row muclienquan">
             {{#each bvlienquan}}
             <div class="col-sm-3 mb-4">
@@ -73,3 +77,69 @@
         </div>
     </div>
 </div>
+{{#section 'js'}}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.5/pagination.js"></script>
+<script>
+
+    let sPageURL = window.location.href.split('/')[5];
+
+    let dataTotal = [];
+    $("#frmCM").on("submit", function (e) {
+        e.preventDefault();
+        $.post("/post/uploadCm", $(this).serialize(), function (data) {
+            dataTotal = data;
+            $.get(`/post/is-dataComment/?idPost=${sPageURL}`, function (data, status) {
+
+                $('#panigation1').pagination({
+                    dataSource: data,
+                    pageSize: 3,
+                    autoHidePrevious: true,
+                    autoHideNext: true,
+                    callback: function (data, pagination) {
+                        var html = simpleTemplating(data);
+                        $('.comment').html(html);
+                    }
+                })
+
+            });
+        });
+        $('#ipCM').val("");
+    })
+
+    $.get(`/post/is-dataComment/?idPost=${sPageURL}`, function (data, status) {
+        $('#panigation1').pagination({
+            dataSource: data.concat(dataTotal),
+            pageSize: 3,
+            autoHidePrevious: true,
+            autoHideNext: true,
+            callback: function (data, pagination) {
+                var html = simpleTemplating(data);
+                $('.comment').html(html);
+            }
+        })
+    });
+
+
+
+    function simpleTemplating(data) {
+        var html = ' <div class="comment">';
+        $.each(data, function (index, item) {
+            html += `<div class="ctiet-danhgia text-left">
+                    <div class="nd-danhgia"><b>Nội Dung:&nbsp;&nbsp;</b><i>${item.Content}</i> </div>
+                                  <div class="date-dg"> <b>Ngày:&nbsp;&nbsp;</b><i>${item.DateTime} </i></div>
+                                  <div class="name-docgia"><b>Thành Viên:&nbsp;&nbsp;</b> <i>${item.UserName}</i></div> 
+                                  </div>`;
+        });
+        html += '</div>';
+        return html;
+    }
+
+
+
+
+
+
+</script>
+
+{{/section}}
