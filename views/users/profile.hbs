@@ -1,1 +1,35 @@
-<h1>profile</h1>
+{{#if profileUser}}
+<div class="row mt-4 mb-4 " style="
+    margin-left: 0;
+    margin-right: 0;
+">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <form>
+            <div class="form-group" style="margin-top: 100px;">
+                <label for="username">FullName</label>
+                <input type="text" class="form-control" id="name" value="{{profileUser.Name}}" name="name" readonly>
+
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" value="{{profileUser.UserName}}" name="username"
+                    readonly>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" value="{{profileUser.Password}}"
+                    name="password" readonly>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label" for="email">Email</label>
+                <input readonly type="email" class="form-control" value="{{profileUser.Email}}" id="email" name="email">
+            </div>
+            <div style="text-align: center;cursor: pointer;margin-bottom: 100px;"> <a class="btn btn-primary"
+                    href="/users/updateProfile/{{profileUser.UserID}}" role="button">Cập
+                    Nhật Thông Tin</a></div>
+        </form>
+    </div>
+    <div class="col-3"></div>
+</div>
+{{/if}}

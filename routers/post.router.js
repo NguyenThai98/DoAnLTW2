@@ -477,10 +477,6 @@ router.get('/is-dataComment', async (req, res) => {
 router.get('/detailsCategory/:id', restrict, async (req, res) => {
 
     let id = +req.params.id;
-<<<<<<< HEAD
-=======
-    console.log(id);
->>>>>>> cfbb8c5b9b4e001d028bbf5aa06c5ee0f0807b1f
     const row = await postModels.chitietsp(id);
 
     const row2 = await postModels.bvlienquan();
@@ -527,8 +523,9 @@ router.post('/uploadCm', async (req, res) => {
     }
     await postModels.addCM(entity);
     let newCm = await postModels.selectComentNew(+req.body.idPost);
+
     return res.send(newCm);
-    // res.redirect(req.headers.referer);
+   
 })
 
 

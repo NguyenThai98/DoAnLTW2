@@ -177,9 +177,54 @@ router.post('/register', async function (req, res) {
         TimeRegister: dob,
         Email: req.body.Email
     }
+    console.log(entity);
     await userModel.add(entity);
     res.redirect('/users/login');
 })
 
+router.get('/profile/:idUser', restrict, async (req, res) => {
+    let idUser = req.params.idUser;
+    let profileUser = await userModel.single(+idUser);
+    res.render('users/profile', {
+        profileUser: profileUser[0]
+    })
+})
 
+router.get('/updateProfile/:idUser', restrict, async (req, res) => {
+    let idUser = req.params.idUser;
+    let profileUser = await userModel.single(+idUser);
+    res.render('users/updateProfile', {
+        profileUser: profileUser[0]
+    })
+})
+
+router.post('/updateProfile', restrict, async (req, res) => {
+
+    let idUser = req.body.idUser;
+    let profileUser = await userModel.single(+idUser);
+
+    if (req.body.password != profileUser[0].Password) {
+        const password_hash = bcrypt.hashSync(req.body.password, config.authentication.saltRounds);
+        let entityUpdate = {
+            Name: req.body.name,
+            PenName: req.body.PenName,
+            Password: password_hash,
+            Email: req.body.email,
+            BirthDay: req.body.birthDay
+        }
+        await userModel.updateProfile(entityUpdate, idUser);
+    } else {
+        let entityUpdate = {
+            Name: req.body.name,
+            PenName: req.body.PenName,
+            Email: req.body.email,
+            BirthDay: req.body.birthDay
+        }
+        console.log(entityUpdate);
+        await userModel.updateProfile(entityUpdate, idUser);
+    }
+
+    res.redirect(`/users/profile/${idUser}`);
+    // res.redirect(req.headers.referer);
+})
 module.exports = router;

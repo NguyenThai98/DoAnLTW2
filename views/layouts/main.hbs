@@ -40,7 +40,8 @@
             <form action="/users/logout" id="logout" method="POST"></form>
             <div class="social text-gray">
                 {{#if lcIsAuthenticated}}
-                <span>Hello</span> <b> <a href="/users/profile">{{lcAuthUser.UserName}}</a> !</b>
+                <span>Hello</span> <b> <a
+                        href="/users/profile/{{lcAuthUser.UserID}}">{{lcAuthUser.UserName}}</a> !</b>
                 <a href="javascript: $('#logout').submit()">Đăng Xuất</i></a>
                 {{else}}
                 <a href="/users/login">Đăng Nhập |</i></a>
