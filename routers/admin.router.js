@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const restrict = require('../middlewares/auth.mdw');
-const multer = require('multer');
-const upload = multer({ dest: 'public/assets/images/' });
+
 const adminModels = require('../models/admin.models');
 const editoModels = require('../models/editor.models');
 router.get('/', restrict, (req, res) => {
@@ -31,6 +30,42 @@ router.get('/qlbv', restrict, async (req, res) => {
         DSBV
     })
 })
+
+
+router.get('/qluser', restrict, async (req, res) => {
+
+    let DSUSER = await adminModels.DSUSER();
+    res.render('admin/qluser', {
+        layout: 'admin.hbs',
+        DSUSER
+    })
+})
+
+router.get('/chitietuser', restrict, async (req, res) => {
+
+    let id = req.query.id;
+
+    let chitietUser = await adminModels.chitietUser(id);
+
+    console.log(chitietUser);
+
+    if (chitietUser[0].TypeOfUser == 0) {
+        chitietUser[0].TypeOfUser = "Độc Giả";
+    } else if (chitietUser[0].TypeOfUser == 2) {
+        chitietUser[0].TypeOfUser = "Phóng Viên";
+
+    } else if (chitietUser[0].TypeOfUser == 3) {
+        chitietUser[0].TypeOfUser = "Biên Tập Viên";
+    } else if (chitietUser[0].TypeOfUser == -1) {
+        chitietUser[0].TypeOfUser = "Khách";
+    }
+    res.render('admin/detailsUser', {
+        chitietUser
+    })
+
+})
+
+
 router.get('/chitiet', async (req, res) => {
     let id = req.query.id;
     let ctsp = await adminModels.chitietsp(id);
@@ -55,5 +90,10 @@ router.post('/delete', async (req, res) => {
     console.log(entity);
     await adminModels.delPost(entity);
     res.redirect('/admin/qlbv');
+})
+router.post('/updateTypeUser', async (req, res) => {
+    let id = req.body.idUser;
+    await adminModels.updateTypeUser(req.body.typeUser, id);
+    res.redirect(`/admin/chitietuser/?id=${id}`);
 })
 module.exports = router;

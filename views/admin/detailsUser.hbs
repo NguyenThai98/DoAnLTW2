@@ -1,0 +1,37 @@
+<div class="row" style="margin-bottom: 150px; margin-left: 0;margin-right: 0;">
+    <div class="col-5"></div>
+    <div class="col-2">
+        {{#each chitietUser}}
+        <div class="card">
+            <div class="card-header">
+                <label for="username"><i>Tên Đăng Nhập:</i> <b>{{UserName}}</b> </label>
+
+            </div>
+            <div class="card-header">
+                <label for="typeOfUser"><i>Chức Vụ Thành :</i> <b>{{TypeOfUser}}</b></label>
+            </div>
+            <div class="card-footer">
+                <div class="form-group">
+                    <form method="POST" action="/admin/updateTypeUser">
+                        <input type="hidden" name="idUser" value="{{UserID}}">
+                        <label for="typeUser"><i>Thay Đổi Chức Vụ: </i></label>
+                        <select class="form-control  mt-4 mb-4" id="typeUser" name="typeUser">
+                            <option value="-1"><b>Khách</b></option>
+                            <option value="0"><b>Độc Giả</b></option>
+                            <option value="2"><b>Phóng Viên</b></option>
+                            <option value="3"><b>Biên Tập Viên</b></option>
+
+                        </select>
+                        <button style="cursor: pointer;" type="submit" class="btn btn-outline-dark">Xác Nhận Thay
+                            Đổi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+    <div class="col-5">
+
+        <a name="" id="" class="btn btn-primary" href="/admin/qluser" role="button">Danh Sách Thành Viên</a>
+    </div>
+</div>

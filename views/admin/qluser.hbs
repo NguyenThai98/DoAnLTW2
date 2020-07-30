@@ -1,0 +1,30 @@
+<div class="text-center">
+    <h1>Quản Lý Thành Viên</h1>
+</div>
+<div class="row" style="margin-left: 0;margin-right: 0;">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th scope="col">Số Thứ Tự</th>
+                    <th scope="col">Tên Thành Viên</th>
+                    <th scope="col">Xử Lý</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each DSUSER}}
+                <tr>
+                    <td> {{UserID}} </td>
+                    <td> {{UserName}} </td>
+                    <td>
+                        <a name="" id="" class="btn btn-outline-secondary" href="/admin/chitietuser/?id={{UserID}}"
+                            role="button">Xem Chi Tiết</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+    <div class="col-2"></div>
+</div>

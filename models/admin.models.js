@@ -10,4 +10,19 @@ module.exports = {
     delPost: function (entity) {
         return db.del('news', entity);
     },
+    DSUSER: function () {
+        return db.load(`select * from user where TypeOfUser != 4`);
+    },
+    chitietUser: function (id) {
+        return db.load(`select * from user where UserID = ${id}`);
+    },
+    updateTypeUser: function (typeUser, idUser) {
+        let entity = {
+            TypeOfUser: typeUser
+        }
+        let condition = {
+            UserID: idUser
+        }
+        return db.patch('user', entity, condition);
+    },
 }
