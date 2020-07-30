@@ -3,7 +3,7 @@ const app = express();
 const PORT = 3000;
 var bodyParser = require('body-parser');
 
-
+require('express-async-errors');
 app.use(express.urlencoded({
     extended: true
 }));
@@ -19,10 +19,16 @@ app.use('/users', require('./routers/users.router'));
 app.use('/post', require('./routers/post.router'));
 app.use('/editor', require('./routers/bientapvien.router.js'));
 
+app.use('/admin', require('./routers/admin.router'));
+
+
 app.use('/public', express.static('public'));
 
 app.get('/', function (req, res) {
     res.render('home');
+})
+app.use(function (req, res) {
+    res.render('404', { layout: false });
 })
 
 app.use(function (err, req, res, next) {

@@ -1,0 +1,56 @@
+<div class="text-center">
+    <h3 class="mt-4">Chi Tiết Sản Phẩm</h3>
+</div>
+{{#each sanpham}}
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <div class="details-categories">
+            <div class="details-img h-50">
+                <a href="#"><img src="/public/assets/images/{{Avatar}}"> </a>
+            </div>
+            <div class="details-content">
+                <div class="ct-title font-weight-bold">
+                    {{NewsTitle}}
+                </div>
+                <div class="ct-date">
+                    {{DatePost}}
+                </div>
+                <div class="ct-content ">
+                    {{{Content}}}
+                </div>
+                <div class="ct-tag font-weight-bold">
+                    #{{TagName}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="col-2">
+
+    </div>
+</div>
+<form method="POST" action="/admin/confirm" id="frmComfirmAdmin">
+    <input type="hidden" value="{{NewsID}}" name="idPost">
+</form>
+<form action="/admin/delete" method="POST" id="frmAdminDel">
+    <input type="hidden" name="id" value="{{NewsID}}">
+</form>
+{{/each}}
+<div class="row">
+    <div class="container text-center">
+        {{#if isXuatBan}}
+        <input type="text" readonly class="form-control w-100 mt-4 mb-4 text-center" href="javascript:void(0)"
+            value="Đã Xuất Bản">
+        <a name="" id="" class="btn   btn-outline-dark" href="javascript: $('#frmAdminDel').submit();"
+            role="button">Xóa</a>
+        {{else}}
+        <a name="" id="" class="btn btn-outline-success w-100 mt-4 mb-4"
+            href="javascript: $('#frmComfirmAdmin').submit()" role="button">Xuất
+            Bản</a>
+        <a name="" id="" class="btn   btn-outline-dark" href="javascript: $('#frmAdminDel').submit();"
+            role="button">Xóa</a>
+
+        {{/if}}
+    </div>
+</div>

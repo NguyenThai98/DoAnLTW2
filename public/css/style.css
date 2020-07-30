@@ -339,6 +339,10 @@ section .container .owl-nav {
   font-family: var(--Livvic);
 }
 
+li.nav-item {
+    width: 152px;
+}
+
 .paginationjs-pages>ul {
   display: flex;
   justify-content: center;
@@ -764,3 +768,19 @@ nguoi viet bai
 }
 
 /* css gia han bai viet xxx*/
+
+
+/* css admin */
+
+
+li.loginAdmin {
+  display: flex;
+  justify-content: flex-end;
+  width: 500px;
+  margin-top: 7px;
+}
+.container-ntt{
+  width: 1200px;
+  margin: 0 auto;
+}
+/* css admin xxx*/
