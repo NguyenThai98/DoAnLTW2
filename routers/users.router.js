@@ -23,7 +23,9 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => {
     let username = req.body.UserNameLogin;
     let pw = req.body.PasswordLogin;
+
     let user = await userModel.singleByUserName(username);
+
     let pwh = user.Password;
 
     let typeUser = user.TypeOfUser;
@@ -33,11 +35,15 @@ router.post('/login', async (req, res) => {
         let TimeLogin = new Date().getTime();
         let idUser = user.UserID;
         let phut = Math.floor((TimeLogin - +user.TimeRegister) / 60 / 1000);
-        if (phut > 10080) {
-            await userModel.updateTypeUser(-1, idUser);
-            res.render('users/login', {
-                error: "Tài Khoản Bạn Cần Gia Hạn !",
-            });
+
+        if (phut > 10080 && typeUser == 0) {
+            await userModel.updateType(-1, idUser);
+            let us = await userModel.single(idUser);
+
+            delete us.Password;
+            req.session.isAuthenticated = true;
+            req.session.authUser = us[0];
+            res.redirect('/');
         } else {
             if (typeUser == 0 || typeUser == -1) {
                 delete user.Password;
@@ -68,6 +74,7 @@ router.post('/login', async (req, res) => {
             error: "username or password invalid!",
         });
     }
+
 })
 
 router.get('/extension', (req, res) => {
@@ -78,7 +85,7 @@ router.post('/extension', async (req, res) => {
     const password = req.body.password;
     let user = await userModel.singleByUserName(username);
     let pwh = user.Password;
-
+    let typeUser = 0;
     let rs = bcrypt.compareSync(password, pwh);
     if (user && rs) {
         let idUser = user.UserID;
@@ -86,10 +93,14 @@ router.post('/extension', async (req, res) => {
         var dob = new Date();
         dob.setDate(now.getDate());
         dob = dob.getTime();
-        await userModel.updateTypeUser(dob, idUser);
+        let entity = {
+            dob,
+            typeUser
+        }
+        await userModel.updateTypeUser(entity, idUser);
         delete user.Password;
-        req.session.isAuthenticated = true;
-        req.session.authUser = user;
+        req.session.isAuthenticated = false;
+        req.session.authUser = null;
         res.render('users/login', {
             error: "Gia hạn thành công vui lòng đăng nhập lại !!!"
         });
@@ -116,15 +127,17 @@ router.post('/resetpass', async (req, res) => {
         let number = Math.floor(getRandomArbitrary(1000, 10000)) + "";
         let pw = text + number;
         let password_hash = bcrypt.hashSync(pw, config.authentication.saltRounds);
+
         await userModel.updatePw(password_hash, user.UserID);
         let content = `<ul>
         <li>Reset Password</li>
         <li> Mật khẩu của bạn là: ${pw}</li>
     </ul>
     `;
+
         let mailOptions = {
-            from: 'nguyenthai4920178@gmail.com',
-            to: 'thongvo306@gmail.com',
+            from: 'nguyenthai492017@gmail.com',
+            to: user.Email,
             subject: 'Reset password from NguyenThai',
             text: 'Reset password',
             html: content
@@ -165,10 +178,9 @@ router.post('/logout', restrict, async (req, res) => {
 router.post('/register', async function (req, res) {
     var now = new Date();
     var dob = new Date();
-    dob.setDate(now.getDate() - 3);
+    dob.setDate(now.getDate());
 
     dob = dob.getTime();
-
     const password_hash = bcrypt.hashSync(req.body.Password, config.authentication.saltRounds);
     const entity = {
         UserName: req.body.UserName,
@@ -177,7 +189,7 @@ router.post('/register', async function (req, res) {
         TimeRegister: dob,
         Email: req.body.Email
     }
-    console.log(entity);
+
     await userModel.add(entity);
     res.redirect('/users/login');
 })
@@ -220,11 +232,11 @@ router.post('/updateProfile', restrict, async (req, res) => {
             Email: req.body.email,
             BirthDay: req.body.birthDay
         }
-        console.log(entityUpdate);
+
         await userModel.updateProfile(entityUpdate, idUser);
     }
 
     res.redirect(`/users/profile/${idUser}`);
-    // res.redirect(req.headers.referer);
+
 })
 module.exports = router;

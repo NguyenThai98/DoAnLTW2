@@ -47,8 +47,6 @@ router.get('/chitietuser', restrict, async (req, res) => {
 
     let chitietUser = await adminModels.chitietUser(id);
 
-    console.log(chitietUser);
-
     if (chitietUser[0].TypeOfUser == 0) {
         chitietUser[0].TypeOfUser = "Độc Giả";
     } else if (chitietUser[0].TypeOfUser == 2) {
@@ -87,7 +85,7 @@ router.post('/delete', async (req, res) => {
     let entity = {
         NewsID: idPost
     }
-    console.log(entity);
+
     await adminModels.delPost(entity);
     res.redirect('/admin/qlbv');
 })

@@ -23,9 +23,19 @@ module.exports = {
     add: function (entity) {
         return db.add(TBL_USERS, entity);
     },
-    updateTypeUser: function (timeRegister, idUser) {
+    updateTypeUser: function (obj, idUser) {
         let entity = {
-            TimeRegister: timeRegister
+            TimeRegister: obj.dob,
+            TypeOfUser: obj.typeUser
+        }
+        let condition = {
+            UserID: idUser
+        }
+        return db.patch(TBL_USERS, entity, condition);
+    },
+    updateType: function (type, idUser) {
+        let entity = {
+            TypeOfUser: type
         }
         let condition = {
             UserID: idUser

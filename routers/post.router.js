@@ -27,7 +27,7 @@ router.get('/phongvien', restrict, async (req, res) => {
     res.render('post/reporter', {
         list,
         listCM,
-        idUser: res.locals.lcAuthUser.UserID
+        idUser: res.locals.lcAuthUser.UserID,
     });
 
 })
@@ -131,7 +131,8 @@ router.post('/phongvien', upload.single('Avartar'), async (req, res) => {
     res.redirect('/post/phongvien');
 
 })
-router.get('/listCategories/:id', restrict, async (req, res) => {
+router.get('/listCategories/:id', async (req, res) => {
+
     let id = req.params.id;
     const limit = 2;
 
@@ -171,14 +172,13 @@ router.get('/listCategories/:id', restrict, async (req, res) => {
     }
     let typeUser = req.session.authUser.TypeOfUser;
 
-
     res.render('post/listCategoriesParent', {
         listIsPremium,
         listNotPremium,
         list: row,
         empty: row.length == 0,
         catName,
-        typeUser: typeUser == 0,
+        typeUser: typeUser == 0 || typeUser == 2 || typeUser == 3,
         pages_item,
         next: +page + 1,
         prev: +page - 1,
@@ -414,7 +414,7 @@ router.post('/edit', upload.single('Avartar'), async (req, res) => {
     }
 
 })
-router.get('/listChild/:id', restrict, async (req, res) => {
+router.get('/listChild/:id', async (req, res) => {
     let id = req.params.id;
     const limit = 1;
     let page = req.query.page || 1;
@@ -452,7 +452,7 @@ router.get('/listChild/:id', restrict, async (req, res) => {
         can_go_next: page >= nTrang,
     });
 })
-router.get('/listTag', restrict, async (req, res) => {
+router.get('/listTag', async (req, res) => {
     const nameTag = req.query.tagName;
     const row = await postModels.listTag(nameTag);
     let TagName = [];
@@ -498,9 +498,7 @@ router.post('/search', async (req, res) => {
     })
 })
 
-router.post('/uploadCm', async (req, res) => {
-
-
+router.post('/uploadCm', restrict, async (req, res) => {
     var d = new Date();
     var n = d.toString();
     n = n.split(' ');
@@ -525,7 +523,7 @@ router.post('/uploadCm', async (req, res) => {
     let newCm = await postModels.selectComentNew(+req.body.idPost);
 
     return res.send(newCm);
-   
+
 })
 
 
